@@ -1,16 +1,25 @@
+/* style.css */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+.container {
+    position: relative;
+    z-index: 1; /* Ensure content stays above the background */
+    text-align: center;
+    color: white;
+    padding: 20px;
 }
 
 .background {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #000000, #000033, #000066, #000099);
-    transition: background 0.1s ease;
+    z-index: -1; /* Ensure it stays behind other content */
+    background: black; /* Initial black background */
 }
