@@ -1,25 +1,58 @@
-/* style.css */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden; /* Prevent scrolling */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+html, body { 
+  
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Roboto' !important; 
+  color: white;
+  font-size: 9px;
 }
 
-.container {
-    position: relative;
-    z-index: 1; /* Ensure content stays above the background */
-    text-align: center;
-    color: white;
-    padding: 20px;
+#magic {
+
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: -9999;
 }
 
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure it stays behind other content */
-    background: black; /* Initial black background */
+.playground{
+
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: block;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+.bottomPosition{
+
+  text-align: center;
+  margin-bottom: 50px;
+  
+}
+.minText{
+  
+  font-size: 14px;
+}
+
+a {
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
 }
