@@ -101,42 +101,66 @@ class CreateParticles {
     this.bindEvents();
   }
 
+  
   setup() {
-    // Create geometry for the particles based on the font and text
-    const geometry = new THREE.BufferGeometry();
-    const positions = [];
-    const sizes = [];
-    const colors = [];
-
-    // Create text mesh (particles based on text)
+    // Step 1: Create geometry for the plane based on camera view
+    const geometry = new THREE.PlaneGeometry(
+      this.visibleWidthAtZDepth(100, this.camera),
+      this.visibleHeightAtZDepth(100, this.camera)
+    );
+    
+    // Create a transparent green plane for raycasting (invisible but interactive)
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true });
+    this.planeArea = new THREE.Mesh(geometry, material);
+    
+    // Make the plane invisible in the scene (but still interactable for raycasting)
+    this.planeArea.visible = false;
+    
+    // Add the plane to the scene
+    this.scene.add(this.planeArea);
+  
+    // Step 2: Create text-based particles (this is the particle system setup from before)
     const textGeometry = new THREE.TextGeometry(this.data.text, {
       font: this.font,
       size: this.data.textSize,
       height: 0.1
     });
-    
+  
+    // Buffer geometry to hold particle data
+    const particleGeometry = new THREE.BufferGeometry();
+    const positions = [];
+    const sizes = [];
+    const colors = [];
+  
+    // Extract vertex positions from the text geometry
     const vertices = textGeometry.attributes.position.array;
     for (let i = 0; i < vertices.length; i += 3) {
       positions.push(vertices[i], vertices[i + 1], vertices[i + 2]);
       sizes.push(this.data.particleSize);
       colors.push(this.data.particleColor, this.data.particleColor, this.data.particleColor);
     }
-
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-    geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
-    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-    // Create material for the particles
-    const material = new THREE.PointsMaterial({
+  
+    // Add the particle attributes to the geometry
+    particleGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    particleGeometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+    particleGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+  
+    // Step 3: Create material for particles
+    const particleMaterial = new THREE.PointsMaterial({
       size: this.data.particleSize,
       vertexColors: true,
       map: this.particleImg,
-      transparent: true,
+      transparent: true
     });
-
-    this.particleSystem = new THREE.Points(geometry, material);
+  
+    // Step 4: Create the particle system
+    this.particleSystem = new THREE.Points(particleGeometry, particleMaterial);
     this.scene.add(this.particleSystem);
+  
+    // Additional setup if necessary (like animations or interactivity)
+    this.createText(); // If this refers to additional text setup (like adding text to the scene or modifying particles)
   }
+  
 
   bindEvents() {
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
