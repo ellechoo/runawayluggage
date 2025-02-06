@@ -126,6 +126,7 @@ class CreateParticles {
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, transparent: true });
     this.planeArea = new THREE.Mesh(geometry, material);
     
+    
     // Make the plane invisible in the scene (but still interactable for raycasting)
     this.planeArea.visible = false;
     
@@ -164,8 +165,8 @@ class CreateParticles {
 
     let colors = [];
     let sizes = [];
-
     let positions = [];
+
     for (let x = 0; x < shapes.length; x++) {
       let shape = shapes[x];
 
@@ -175,8 +176,9 @@ class CreateParticles {
 
       points.forEach((element, z) => {
         const a = new THREE.Vector3( element.x, element.y, 0 );
-        thePoints.push( a );
-        sizes.push( 1 );
+        positions.push(a.x, a.y, a.z);  // Push to the positions array
+        sizes.push(1);  // Assign size
+        colors.push(this.data.particleColor);
       });
     }
 
