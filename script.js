@@ -101,6 +101,15 @@ class CreateParticles {
     this.bindEvents();
   }
 
+
+  visibleWidthAtZDepth(depth, camera) {
+    return (depth * 2 * Math.tan(camera.fov * Math.PI / 360));
+  }
+
+  visibleHeightAtZDepth(depth, camera) {
+    return this.visibleWidthAtZDepth(depth, camera) / camera.aspect;
+  }
+
   
   setup() {
     // Calculate the visible width and height at z=100 from the camera
