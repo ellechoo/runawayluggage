@@ -109,11 +109,9 @@ class CreateParticles {
     this.bindEvents();
   }
 
-  distance(x1, y1, x2, y2) {
-    let dx = x2 - x1;
-    let dy = y2 - y1;
-    return Math.sqrt(dx * dx + dy * dy);
-  }  
+  distance (x1, y1, x2, y2){
+    return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+  }
 
   visibleWidthAtZDepth(depth, camera) {
     return (depth * 2 * Math.tan(camera.fov * Math.PI / 360));
@@ -185,7 +183,7 @@ class CreateParticles {
       points.forEach((element, z) => {
         const a = new THREE.Vector3( element.x, element.y, 0 );
         positions.push(a.x, a.y, a.z);  // Push to the positions array
-        sizes.push(1);  // Assign size
+        sizes.push(1);  // size
         colors.push(this.data.particleColor);
       });
     }
