@@ -240,11 +240,13 @@ class CreateParticles {
 
     let mouseDistance = Infinity;
 
-    if (intersects.length > 0) {
+    const pos = this.particles.geometry.attributes.position;
+    let colors = this.particles.geometry.attributes.color;
+    let size = this.particles.geometry.attributes.size;
 
-      const pos = this.particles.geometry.attributes.position;
-      let colors = this.particles.geometry.attributes.color;
-      let size = this.particles.geometry.attributes.size;
+
+
+    if (intersects.length > 0) {
 
 
       const mx = intersects[0].point.x;
