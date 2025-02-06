@@ -72,3 +72,90 @@ class Environment {
     this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
   }
 }
+
+// CreateParticles Class
+class CreateParticles {
+  constructor(scene, font, particleImg, camera, renderer) {
+    this.scene = scene;
+    this.font = font;
+    this.particleImg = particleImg;
+    this.camera = camera;
+    this.renderer = renderer;
+
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2(-200, 200);
+    this.colorChange = new THREE.Color();
+    this.buttom = false;
+
+    this.data = {
+      text: 'FUTURE\nIS NOW',
+      amount: 1500,
+      particleSize: 1,
+      particleColor: 0xffffff,
+      textSize: 16,
+      area: 250,
+      ease: 0.05,
+    };
+
+    this.setup();
+    this.bindEvents();
+  }
+
+  setup() {
+    // Create geometry for the particles based on the font and text
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+    const sizes = [];
+    const colors = [];
+
+    // Create text mesh (particles based on text)
+    const textGeometry = new THREE.TextGeometry(this.data.text, {
+      font: this.font,
+      size: this.data.textSize,
+      height: 0.1
+    });
+    
+    const vertices = textGeometry.attributes.position.array;
+    for (let i = 0; i < vertices.length; i += 3) {
+      positions.push(vertices[i], vertices[i + 1], vertices[i + 2]);
+      sizes.push(this.data.particleSize);
+      colors.push(this.data.particleColor, this.data.particleColor, this.data.particleColor);
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+    // Create material for the particles
+    const material = new THREE.PointsMaterial({
+      size: this.data.particleSize,
+      vertexColors: true,
+      map: this.particleImg,
+      transparent: true,
+    });
+
+    this.particleSystem = new THREE.Points(geometry, material);
+    this.scene.add(this.particleSystem);
+  }
+
+  bindEvents() {
+    window.addEventListener('mousemove', this.onMouseMove.bind(this));
+    window.addEventListener('click', this.onClick.bind(this));
+  }
+
+  onMouseMove(event) {
+    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
+
+  onClick(event) {
+    // Toggle between interactive states (or add more actions)
+    this.buttom = !this.buttom;
+  }
+
+  render() {
+    // Update raycasting and particle system
+    this.raycaster.update();
+    this.particleSystem.rotation.y += 0.01;
+  }
+}
