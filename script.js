@@ -1,10 +1,3 @@
-// Check if document is ready or load when DOM is complete
-if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
-  preload();
-} else {
-  document.addEventListener("DOMContentLoaded", preload);
-}
-
 // Preload function
 const preload = () => {
   let manager = new THREE.LoadingManager();
@@ -20,6 +13,13 @@ const preload = () => {
   });
 
   const particle = new THREE.TextureLoader(manager).load('https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png');
+}
+
+// Check if document is ready or load when DOM is complete
+if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+  preload();
+} else {
+  document.addEventListener("DOMContentLoaded", preload);
 }
 
 // Environment Class
