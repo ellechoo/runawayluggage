@@ -97,23 +97,6 @@ function init() {
     preload();
 }
 
-// Animation loop
-function animate() {
-    if (!isPreloaded) {
-        requestAnimationFrame(animate);
-        console.log("Waiting for preload...");
-        return;
-    }
-
-    if (particleSystem) {
-        particleSystem.rotation.x += 0.01;
-        particleSystem.rotation.y += 0.01;
-    }
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-}
-
 // Run when the document is ready
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Document ready, initializing...");
