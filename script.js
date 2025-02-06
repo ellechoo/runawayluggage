@@ -6,12 +6,12 @@ const preload = () => {
     
         // Error handling for texture loading
         new THREE.TextureLoader(manager)
-            .load(
-                'particle.png', // Texture path
-                (texture) => {
-                    particle = texture; // Successfully loaded texture
-                    console.log("Texture loaded successfully");
-                },
+        .load(
+            'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png', // New texture path 
+            (texture) => {
+                particle = texture; // Successfully loaded texture
+                console.log("Texture loaded successfully");
+            },
                 undefined, // Progress callback (optional)
                 (error) => {
                     console.error("Error loading texture:", error);
