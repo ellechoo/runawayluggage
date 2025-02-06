@@ -45,6 +45,14 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
 } else {
   document.addEventListener("DOMContentLoaded", preload);
 }
+
+//magic check
+this.container = document.querySelector('#magic');
+if (!this.container) {
+  console.error("Error: No element with id 'magic' found.");
+}
+
+
 //changes up
 
     
@@ -374,7 +382,7 @@ class Environment {
   
 
 
-  
+
 // Preload function definition (ensure it's placed after class definitions)
 const preload = () => {
   // Load the texture from an external URL
