@@ -1,50 +1,101 @@
-// Define your classes first so that they are available when preload() creates an Environment
+let manager;  // Declare the loading manager outside of preload()
+let typo = null;
+let particle = null; // Initialize the variable as null
+
+function preload () {
+    manager = new THREE.LoadingManager();  // Initialize manager here
+
+    // Error handling for texture loading
+    new THREE.TextureLoader(manager)
+    .load(
+        'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png', // New texture path 
+        (texture) => {
+            particle = texture; // Successfully loaded texture
+            console.log("Texture loaded successfully");
+        },
+        undefined, // Progress callback (optional)
+        (error) => {
+            console.error("Error loading texture:", error);
+            // Optionally set a fallback texture or handle the error here
+        }
+    );
+
+    // Load the font with error handling
+    const loader = new THREE.FontLoader(manager);
+    loader.load(
+        'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
+        function (font) { 
+            typo = font;
+            console.log("Font loaded successfully");
+        },
+        undefined, // Progress callback (optional)
+        function (error) {
+            console.error("Error loading font:", error);
+        }
+    );
+
+    // After loading assets, initialize the environment
+    manager.onLoad = function() { 
+        if (typo && particle) {
+            new Environment(typo, particle);  // Now `Environment` can be used
+        } else {
+            console.error("Error: Some assets failed to load.");
+        }
+    };
+};
+
+if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+    preload();
+} else {
+    document.addEventListener("DOMContentLoaded", preload);
+}
 
 class Environment {
     constructor(font, particle) {
-      this.font = font;
-      this.particle = particle;
-      this.container = document.querySelector('#magic');
-      this.scene = new THREE.Scene();
-      this.createCamera();
-      this.createRenderer();
-      this.setup();
-      this.bindEvents();
+        this.font = font;
+        this.particle = particle;
+        this.container = document.querySelector('#magic');
+        this.scene = new THREE.Scene();
+        this.createCamera();
+        this.createRenderer();
+        this.setup();
+        this.bindEvents();
     }
-  
-    bindEvents() {
-      window.addEventListener('resize', this.onWindowResize.bind(this));
+
+    bindEvents(){
+        window.addEventListener('resize', this.onWindowResize.bind(this));
     }
-  
-    setup() {
-      this.createParticles = new CreateParticles(this.scene, this.font, this.particle, this.camera, this.renderer);
+
+    setup() { 
+        this.createParticles = new CreateParticles(this.scene, this.font, this.particle, this.camera, this.renderer);
     }
-  
+
     render() {
-      this.createParticles.render();
-      this.renderer.render(this.scene, this.camera);
+        this.createParticles.render();
+        this.renderer.render(this.scene, this.camera);
     }
-  
+
     createCamera() {
-      this.camera = new THREE.PerspectiveCamera(65, this.container.clientWidth / this.container.clientHeight, 1, 10000);
-      this.camera.position.set(0, 0, 100);
+        this.camera = new THREE.PerspectiveCamera(65, this.container.clientWidth / this.container.clientHeight, 1, 10000);
+        this.camera.position.set(0,0, 100);
     }
-  
+
     createRenderer() {
-      this.renderer = new THREE.WebGLRenderer();
-      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      this.renderer.outputEncoding = THREE.sRGBEncoding;
-      this.container.appendChild(this.renderer.domElement);
-      this.renderer.setAnimationLoop(() => { this.render(); });
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.outputEncoding = THREE.sRGBEncoding;
+        this.container.appendChild(this.renderer.domElement);
+        this.renderer.setAnimationLoop(() => { this.render() });
     }
-  
+
     onWindowResize() {
-      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+        this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     }
-  }
+}
+
   
   class CreateParticles {
     constructor(scene, font, particleImg, camera, renderer) {
