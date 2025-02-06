@@ -48,7 +48,9 @@ const preload = () => {
     } else {
         document.addEventListener("DOMContentLoaded", preload);
     }   
-//idk
+//cutoff
+
+
 
     manager.onLoad = function() { 
         if (typo) {
@@ -60,7 +62,7 @@ const preload = () => {
     loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function (font) { 
         typo = font;
     });
-    
+
 
 if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
     preload();
@@ -431,31 +433,5 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
          
           return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
       }
-  }  
-
-//from html
-const vertexShader = `
-attribute float size;
-attribute vec3 customColor;
-varying vec3 vColor;
-
-void main() {
-  vColor = customColor;
-  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-  gl_PointSize = size * (300.0 / -mvPosition.z);
-  gl_Position = projectionMatrix * mvPosition;
-}
-`;
-
-const fragmentShader = `
-uniform vec3 color;
-uniform sampler2D pointTexture;
-varying vec3 vColor;
-
-void main() {
-  gl_FragColor = vec4(color * vColor, 1.0);
-  gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
-}
-`;
-
+  }
 
