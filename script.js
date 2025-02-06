@@ -1,4 +1,3 @@
-// Preload function
 const preload = () => {
   let manager = new THREE.LoadingManager();
   manager.onLoad = function() {
@@ -6,13 +5,18 @@ const preload = () => {
     const environment = new Environment(typo, particle);
   }
 
-  var typo = null;
+  let typo = null;
+  let particle = null;
+
   const loader = new THREE.FontLoader(manager);
   loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function (font) {
     typo = font;
   });
 
-  const particle = new THREE.TextureLoader(manager).load('https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png');
+  const particleLoader = new THREE.TextureLoader(manager);
+  particleLoader.load('https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png', function(texture) {
+    particle = texture;
+  });
 }
 
 // Check if document is ready or load when DOM is complete
@@ -133,43 +137,49 @@ class CreateParticles {
   }
 
   createText() {
-    let thePoints = {};
-    let shapes = this.font.generateShapes(this.data.text, this.data.textSize);
-    let geometry = new THREE.ShapeGeometry(shapes);
-    geometry.computeBoundingBox();
+  let thePoints = [];
 
-    const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-    const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
+  let shapes = this.font.generateShapes( this.data.text , this.data.textSize );
+  let geometry = new THREE.ShapeGeometry( shapes );
+  geometry.computeBoundingBox();
 
-    geometry.center();
+  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+  const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
 
-    let holeShapes = [];
+  geometry.center();
 
-    for (let q = 0; q < shapes.length; q++) {
-      let shape = shapes[q];
+  let holeShapes = [];
 
-      if (shape.holes && shape.holes.length > 0) {
-        for (let j = 0; j < shape.holes.length; j++) {
-          let hole = shape.holes[j];
-          holeShapes.push(hole);
-        }
+  for ( let q = 0; q < shapes.length; q++ ) {
+    let shape = shapes[ q ];
+
+    if ( shape.holes && shape.holes.length > 0 ) {
+      for ( let j = 0; j < shape.holes.length; j++ ) {
+        let hole = shape.holes[ j ];
+        holeShapes.push( hole );
       }
     }
-    
-    shapes.push.apply(shapes, holeShapes);
+  }
 
-    let positions = [];
-    for (let x = 0; x < shapes.length; x++) {
-      let shape = shapes[x];
+  shapes.push.apply( shapes, holeShapes );
 
-      const amountPoints = (shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
+  let colors = [];
+  let sizes = [];
 
-      let points = shape.getSpacedPoints(amountPoints);
+  for ( let x = 0; x < shapes.length; x++ ) {
+    let shape = shapes[ x ];
 
-      points.forEach((element, z) => {
-        positions.push(element.x, element.y, 0); // Add each point to positions
-      });
-    }
+    const amountPoints = ( shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
+
+    let points = shape.getSpacedPoints( amountPoints );
+
+    points.forEach( ( element, z ) => {
+      const a = new THREE.Vector3( element.x, element.y, 0 );
+      thePoints.push( a );
+      sizes.push( 1 );
+    });
+  }
+}
 
     // Create geometry for the particle system
     let bufferGeometry = new THREE.BufferGeometry();
@@ -208,7 +218,7 @@ class CreateParticles {
       console.error("Particles not initialized yet!");
       return;
     }
-    
+
     // Time-based calculations
     const time = ((.001 * performance.now()) % 12) / 12;
     const zigzagTime = (1 + Math.sin(time * 2 * Math.PI)) / 6;
@@ -259,49 +269,4 @@ class CreateParticles {
 
   }
 
-  
-  createText() {
-    let thePoints = [];
-
-    let shapes = this.font.generateShapes( this.data.text , this.data.textSize );
-    let geometry = new THREE.ShapeGeometry( shapes );
-    geometry.computeBoundingBox();
-
-    const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-    const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
-
-    geometry.center();
-
-    let holeShapes = [];
-
-    for ( let q = 0; q < shapes.length; q++ ) {
-      let shape = shapes[ q ];
-
-      if ( shape.holes && shape.holes.length > 0 ) {
-        for ( let j = 0; j < shape.holes.length; j++ ) {
-          let hole = shape.holes[ j ];
-          holeShapes.push( hole );
-        }
-      }
-    }
-
-    shapes.push.apply( shapes, holeShapes );
-
-    let colors = [];
-    let sizes = [];
-
-    for ( let x = 0; x < shapes.length; x++ ) {
-      let shape = shapes[ x ];
-
-      const amountPoints = ( shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
-
-      let points = shape.getSpacedPoints( amountPoints );
-
-      points.forEach( ( element, z ) => {
-        const a = new THREE.Vector3( element.x, element.y, 0 );
-        thePoints.push( a );
-        sizes.push( 1 );
-      });
-    }
-  }
 }
