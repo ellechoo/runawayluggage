@@ -159,6 +159,8 @@ class CreateParticles {
 
     if (intersects.length > 0) {
 
+      const pos = this.particles.geometry.attributes.position;
+
 
       const mx = intersects[0].point.x;
       const my = intersects[0].point.y;
@@ -187,6 +189,8 @@ class CreateParticles {
         const mouseDistance = this.distance(mx, my, px, py);
         let d = (dx = mx - px) * dx + (dy = my - py) * dy;
         const f = -this.data.area / d;
+
+        
       }
     }
 
