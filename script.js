@@ -158,10 +158,7 @@ class CreateParticles {
     const intersects = this.raycaster.intersectObject(this.planeArea);
 
     if (intersects.length > 0) {
-      const pos = this.particleSystem.geometry.attributes.position;
-      const copy = this.geometryCopy.attributes.position;
-      const colors = this.particleSystem.geometry.attributes.customColor;
-      const size = this.particleSystem.geometry.attributes.size;
+
 
       const mx = intersects[0].point.x;
       const my = intersects[0].point.y;
@@ -193,8 +190,6 @@ class CreateParticles {
       }
     }
 
-    // Rotate the particle system
-    this.particleSystem.rotation.y += 0.01;
   }
 
   // Create the text method (Moved inside the class)
