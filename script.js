@@ -27,7 +27,8 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
   document.addEventListener("DOMContentLoaded", preload);
 }
 
-// Environment Class
+
+
 class Environment {
   constructor(font, particle) {
     this.font = font;
@@ -108,6 +109,12 @@ class CreateParticles {
     this.bindEvents();
   }
 
+  distance(x1, y1, x2, y2) {
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    return Math.sqrt(dx * dx + dy * dy);
+  }  
+
   visibleWidthAtZDepth(depth, camera) {
     return (depth * 2 * Math.tan(camera.fov * Math.PI / 360));
   }
@@ -183,14 +190,13 @@ class CreateParticles {
       });
     }
 
-    // Create geometry for the particle system
+    // geometry for the particle system
     let bufferGeometry = new THREE.BufferGeometry();
     bufferGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     bufferGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     bufferGeometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
 
 
-    // Create a PointsMaterial using the texture passed into the class
     const material = new THREE.PointsMaterial({
       size: this.data.particleSize,
       color: this.data.particleColor,
