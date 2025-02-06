@@ -2,38 +2,38 @@ let camera, scene, renderer;
 let particles = [];
 let particleCount = 2000;
 let particleGeometry, particleMaterial, particleSystem;
+let isPreloaded = false; // Flag to track preload completion
 
 // Preload function defined before init
 function preload() {
-    // Loading manager to ensure all resources are loaded before rendering
     const loader = new THREE.TextureLoader();
     const fontLoader = new THREE.FontLoader();
-    const loadingManager = new THREE.LoadingManager();
 
-    // Texture loading
+    // Load particle texture
     loader.load('textures/particle.jpg', function(texture) {
-        // Initialize particle system when texture is loaded
         particleMaterial = new THREE.PointsMaterial({
             size: 0.1,
             map: texture,
             blending: THREE.AdditiveBlending,
             transparent: true
         });
+
+        // After texture is loaded, check if everything is ready
+        checkPreloadComplete();
     });
 
-    // Font loading
+    // Load font
     fontLoader.load('fonts/helvetiker_regular.typeface.json', function(font) {
-        // Text geometry creation when font is loaded
         const textGeometry = new THREE.TextGeometry('Hello, World!', {
             font: font,
             size: 1,
             height: 0.1
         });
 
-        // Create particles based on text geometry
+        // Create particles from the text geometry
         const vertices = textGeometry.attributes.position.array;
         for (let i = 0; i < vertices.length; i += 3) {
-            const particle = new THREE.Vector3(vertices[i], vertices[i+1], vertices[i+2]);
+            const particle = new THREE.Vector3(vertices[i], vertices[i + 1], vertices[i + 2]);
             particles.push(particle);
         }
 
@@ -43,9 +43,20 @@ function preload() {
 
         // Add particle system to scene
         scene.add(particleSystem);
+
+        // After font is loaded, check if everything is ready
+        checkPreloadComplete();
     });
 }
 
+// Check if all resources have been loaded
+function checkPreloadComplete() {
+    if (particleMaterial && particleSystem) {
+        isPreloaded = true;
+    }
+}
+
+// Initialize the scene
 function init() {
     // Scene setup
     scene = new THREE.Scene();
@@ -57,19 +68,24 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    // Preload resources
+    // Start loading resources
     preload();
 
     // Animation loop
     animate();
 }
 
+// Animation loop
 function animate() {
-    // Update particle system
-    if (particleSystem) {
-        particleSystem.rotation.x += 0.01;
-        particleSystem.rotation.y += 0.01;
+    // Wait for preload to finish
+    if (!isPreloaded) {
+        requestAnimationFrame(animate);
+        return;
     }
+
+    // Update particle system
+    particleSystem.rotation.x += 0.01;
+    particleSystem.rotation.y += 0.01;
 
     // Render scene
     renderer.render(scene, camera);
