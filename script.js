@@ -375,40 +375,42 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
   
 
 
-
-// Preload function definition (ensure it's placed after class definitions)
-const preload = () => {
-  // Load the texture from an external URL
-  new THREE.TextureLoader(manager)
-    .load(
+  const preload = () => {
+    let manager = new THREE.LoadingManager();
+    manager.onLoad = function() {
+      const environment = new Environment(typo, particle);
+      console.log("All resources loaded successfully");
+    }
+  
+    let typo = null;
+    let particle = null;
+  
+    const loaderFont = new THREE.FontLoader(manager);
+    loaderFont.load(
+      'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
+      function (font) {
+        typo = font;
+        console.log("Font loaded successfully");
+      },
+      undefined,
+      function (error) {
+        console.error("Error loading font:", error);
+      }
+    );
+  
+    const loaderTexture = new THREE.TextureLoader(manager);
+    loaderTexture.load(
       'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png',
-      (texture) => {
+      function(texture) {
         particle = texture;
         console.log("Texture loaded successfully");
       },
       undefined,
-      (error) => {
+      function (error) {
         console.error("Error loading texture:", error);
       }
     );
-
-  // Load the font
-  const loader = new THREE.FontLoader(manager);
-  loader.load(
-    'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
-    function (font) {
-      typo = font;
-      console.log("Font loaded successfully");
-    },
-    undefined,
-    function (error) {
-      console.error("Error loading font:", error);
-    }
-  );
-};
-
-
-
+  };
   
   // Run preload when the document is ready
   if (
