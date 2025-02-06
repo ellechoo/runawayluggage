@@ -237,7 +237,6 @@ class CreateParticles {
 
     // Raycast setup
     this.raycaster.setFromCamera(this.mouse, this.camera);
-
     const intersects = this.raycaster.intersectObject(this.planeArea);
 
     let mouseDistance = Infinity;
@@ -265,7 +264,6 @@ class CreateParticles {
 
         this.colorChange.setHSL(0.5, 1, 1);
         colors.setXYZ(i, this.colorChange.r, this.colorChange.g, this.colorChange.b);
-        colors.needsUpdate = true;
 
         size.array[i] = this.data.particleSize;
         size.needsUpdate = true;
@@ -278,12 +276,17 @@ class CreateParticles {
 
         mouseDistance = this.distance(mx, my, px, py);
 
-        let d = (dx = mx - px) * dx + (dy = my - py) * dy;
+        let d = dx * dx + dy * dy;
+
         const f = -this.data.area / d;
         
         pos.setXYZ(i, px + dx * f, py + dy * f, pz + dz * f);
         
       }
+
+      colors.needsUpdate = true;
+      size.needsUpdate=true;
+      pos.needsUpdate = true;
 
     }else{
 		    	
@@ -337,6 +340,8 @@ class CreateParticles {
         }
       } 
       pos.needsUpdate = true;
+      colors.needsUpdate = true;
+      size.needsUpdate = true;
     }
   }
 }
