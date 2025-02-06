@@ -148,6 +148,8 @@ class CreateParticles {
     let shapes = this.font.generateShapes(this.data.text, this.data.textSize);
     let geometry = new THREE.ShapeGeometry(shapes);
     geometry.computeBoundingBox();
+    this.initialPositions = positions.slice(); // Store the original positions
+
 
     const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
     const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
@@ -300,17 +302,28 @@ class CreateParticles {
           size.array[ i ]  =  this.data.particleSize /1.2;
           size.needsUpdate = true;
 
-        }else{
-
-          const t = Math.atan2( dy, dx );
-          px += f * Math.cos( t );
-          py += f * Math.sin( t );
-
-          pos.setXYZ( i, px, py, pz );
+        }
+        
+        if (someCondition) { 
+          // Particle movement logic
+          const t = Math.atan2(dy, dx);
+          px += f * Math.cos(t);
+          py += f * Math.sin(t);
+      
+          pos.setXYZ(i, px, py, pz);
           pos.needsUpdate = true;
-
-          size.array[ i ]  = this.data.particleSize * 1.3 ;
+      
+          size.array[i] = this.data.particleSize * 1.3;
           size.needsUpdate = true;
+
+        } else {
+          // Easing back to initial position
+          px += (initX - px) * this.data.ease;
+          py += (initY - py) * this.data.ease;
+          pz += (initZ - pz) * this.data.ease;
+      
+          pos.setXYZ(i, px, py, pz);
+          pos.needsUpdate = true;
         }
 
        if ((px > (initX + 10)) || ( px < (initX - 10)) || (py > (initY + 10) || ( py < (initY - 10)))){
