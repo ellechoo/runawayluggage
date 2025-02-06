@@ -1,5 +1,5 @@
 const preload = () => {
-        let manager = new THREE.LoadingManager();
+    let manager = new THREE.LoadingManager();
     
         let typo = null;
         let particle = null; // Initialize the variable as null
@@ -49,7 +49,6 @@ const preload = () => {
         document.addEventListener("DOMContentLoaded", preload);
     }   
 //cutoff
-
 
 
     manager.onLoad = function() { 
@@ -433,5 +432,31 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
          
           return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
       }
-  }
+  }  
+
+//from html
+const vertexShader = `
+attribute float size;
+attribute vec3 customColor;
+varying vec3 vColor;
+
+void main() {
+  vColor = customColor;
+  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  gl_PointSize = size * (300.0 / -mvPosition.z);
+  gl_Position = projectionMatrix * mvPosition;
+}
+`;
+
+const fragmentShader = `
+uniform vec3 color;
+uniform sampler2D pointTexture;
+varying vec3 vColor;
+
+void main() {
+  gl_FragColor = vec4(color * vColor, 1.0);
+  gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+}
+`;
+
 
