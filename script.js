@@ -381,3 +381,38 @@ const preload = () => {
           return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
       }
   }  
+
+//from html
+  const vertexShader = `
+  attribute float size;
+  attribute vec3 customColor;
+  varying vec3 vColor;
+
+  void main() {
+    vColor = customColor;
+    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = size * (300.0 / -mvPosition.z);
+    gl_Position = projectionMatrix * mvPosition;
+  }
+`;
+
+const fragmentShader = `
+  uniform vec3 color;
+  uniform sampler2D pointTexture;
+  varying vec3 vColor;
+
+  void main() {
+    gl_FragColor = vec4(color * vColor, 1.0);
+    gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+  }
+`;
+
+// Example usage in a Three.js material
+const shaderMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    color: { value: new THREE.Color(0xffffff) },
+    pointTexture: { value: new THREE.TextureLoader().load('path/to/texture.png') }
+  },
+  vertexShader: vertexShader,
+  fragmentShader: fragmentShader,
+});
