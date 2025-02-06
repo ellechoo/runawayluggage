@@ -238,6 +238,8 @@ class CreateParticles {
 
     const intersects = this.raycaster.intersectObject(this.planeArea);
 
+    let mouseDistance = Infinity;
+
     if (intersects.length > 0) {
 
       const pos = this.particles.geometry.attributes.position;
@@ -270,7 +272,7 @@ class CreateParticles {
 
         
 
-        let mouseDistance = this.distance(mx, my, px, py);
+        mouseDistance = this.distance(mx, my, px, py);
 
         let d = (dx = mx - px) * dx + (dy = my - py) * dy;
         const f = -this.data.area / d;
