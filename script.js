@@ -1,8 +1,54 @@
 const preload = () => {
-    let manager = new THREE.LoadingManager();
+        let manager = new THREE.LoadingManager();
     
-    let typo = null;
-    let particle = new THREE.TextureLoader().load('particle.png'); // Place particle.png in the same directory
+        let typo = null;
+        let particle = null; // Initialize the variable as null
+    
+        // Error handling for texture loading
+        new THREE.TextureLoader(manager)
+            .load(
+                'particle.png', // Texture path
+                (texture) => {
+                    particle = texture; // Successfully loaded texture
+                    console.log("Texture loaded successfully");
+                },
+                undefined, // Progress callback (optional)
+                (error) => {
+                    console.error("Error loading texture:", error);
+                    // Optionally set a fallback texture or handle the error here
+                }
+            );
+    
+        // After loading assets, initialize the environment
+        manager.onLoad = function() { 
+            if (typo && particle) {
+                new Environment(typo, particle);
+            } else {
+                console.error("Error: Some assets failed to load.");
+            }
+        };
+    
+        // Load the font with error handling
+        const loader = new THREE.FontLoader(manager);
+        loader.load(
+            'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
+            function (font) { 
+                typo = font;
+                console.log("Font loaded successfully");
+            },
+            undefined, // Progress callback (optional)
+            function (error) {
+                console.error("Error loading font:", error);
+            }
+        );
+    };
+    
+    if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+        preload();
+    } else {
+        document.addEventListener("DOMContentLoaded", preload);
+    }   
+//idk
 
     manager.onLoad = function() { 
         if (typo) {
@@ -14,7 +60,7 @@ const preload = () => {
     loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function (font) { 
         typo = font;
     });
-};
+    
 
 if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
     preload();
