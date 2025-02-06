@@ -74,6 +74,8 @@ class Environment {
 }
 
 
+
+
 class CreateParticles {
   constructor(scene, font, particleImg, camera, renderer) {
     this.scene = scene;
@@ -101,7 +103,6 @@ class CreateParticles {
     this.bindEvents();
   }
 
-
   visibleWidthAtZDepth(depth, camera) {
     return (depth * 2 * Math.tan(camera.fov * Math.PI / 360));
   }
@@ -109,7 +110,6 @@ class CreateParticles {
   visibleHeightAtZDepth(depth, camera) {
     return this.visibleWidthAtZDepth(depth, camera) / camera.aspect;
   }
-
 
   setup() {
     // Calculate the visible width and height at z=100 from the camera
@@ -131,7 +131,6 @@ class CreateParticles {
     // Create the text or particle system
     this.createText();
   }
-
 
   bindEvents() {
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -197,58 +196,50 @@ class CreateParticles {
     // Rotate the particle system
     this.particleSystem.rotation.y += 0.01;
   }
-  
-}
 
-createText(){
+  // Create the text method (Moved inside the class)
+  createText() {
+    let thePoints = [];
 
-  let thePoints = [];
+    let shapes = this.font.generateShapes( this.data.text , this.data.textSize );
+    let geometry = new THREE.ShapeGeometry( shapes );
+    geometry.computeBoundingBox();
 
-  let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
-  let geometry = new THREE.ShapeGeometry( shapes );
-  geometry.computeBoundingBox();
+    const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+    const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
 
-  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-  const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
+    geometry.center();
 
-  geometry.center();
+    let holeShapes = [];
 
-  let holeShapes = [];
+    for ( let q = 0; q < shapes.length; q++ ) {
+      let shape = shapes[ q ];
 
-  for ( let q = 0; q < shapes.length; q ++ ) {
-
-    let shape = shapes[ q ];
-
-    if ( shape.holes && shape.holes.length > 0 ) {
-
-      for ( let  j = 0; j < shape.holes.length; j ++ ) {
-
-        let  hole = shape.holes[ j ];
-        holeShapes.push( hole );
+      if ( shape.holes && shape.holes.length > 0 ) {
+        for ( let j = 0; j < shape.holes.length; j++ ) {
+          let hole = shape.holes[ j ];
+          holeShapes.push( hole );
+        }
       }
     }
 
-  }
-  
-  shapes.push.apply( shapes, holeShapes );
+    shapes.push.apply( shapes, holeShapes );
 
-  let colors = [];
-  let sizes = [];
-        
-  for ( let  x = 0; x < shapes.length; x ++ ) {
+    let colors = [];
+    let sizes = [];
 
-    let shape = shapes[ x ];
+    for ( let x = 0; x < shapes.length; x++ ) {
+      let shape = shapes[ x ];
 
-    const amountPoints = ( shape.type == 'Path') ? this.data.amount/2 : this.data.amount;
+      const amountPoints = ( shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
 
-    let points = shape.getSpacedPoints( amountPoints ) ;
+      let points = shape.getSpacedPoints( amountPoints );
 
-    points.forEach( ( element, z ) => {
-          
-      const a = new THREE.Vector3( element.x, element.y, 0 );
-      thePoints.push( a );
-      sizes.push( 1 )
-
-     });
+      points.forEach( ( element, z ) => {
+        const a = new THREE.Vector3( element.x, element.y, 0 );
+        thePoints.push( a );
+        sizes.push( 1 );
+      });
+    }
   }
 }
