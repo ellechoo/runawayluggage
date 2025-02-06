@@ -388,7 +388,7 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
   }  
 
 //from html
-  const vertexShader = `
+  const vertexShader = 
   attribute float size;
   attribute vec3 customColor;
   varying vec3 vColor;
@@ -399,9 +399,9 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
     gl_PointSize = size * (300.0 / -mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
   }
-`;
+;
 
-const fragmentShader = `
+const fragmentShader = 
   uniform vec3 color;
   uniform sampler2D pointTexture;
   varying vec3 vColor;
@@ -410,7 +410,7 @@ const fragmentShader = `
     gl_FragColor = vec4(color * vColor, 1.0);
     gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
   }
-`;
+;
 
 // Example usage in a Three.js material
 const shaderMaterial = new THREE.ShaderMaterial({
