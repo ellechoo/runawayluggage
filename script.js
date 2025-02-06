@@ -214,6 +214,7 @@ class CreateParticles {
     this.buttom = !this.buttom;
   }
 
+
   render() {
     if (!this.particles) {
       console.error("Particles not initialized yet!");
@@ -232,16 +233,17 @@ class CreateParticles {
     if (intersects.length > 0) {
 
       const pos = this.particles.geometry.attributes.position;
+      let colors = this.particles.geometry.attributes.color;
+      let size = this.particles.geometry.attributes.size;
 
 
       const mx = intersects[0].point.x;
       const my = intersects[0].point.y;
       const mz = intersects[0].point.z;
 
+      const copy = new THREE.Vector3();
+
       for (let i = 0, l = pos.count; i < l; i++) {
-        const initX = copy.getX(i);
-        const initY = copy.getY(i);
-        const initZ = copy.getZ(i);
 
         let px = pos.getX(i);
         let py = pos.getY(i);
