@@ -110,7 +110,7 @@ class CreateParticles {
     return this.visibleWidthAtZDepth(depth, camera) / camera.aspect;
   }
 
-  
+
   setup() {
     // Calculate the visible width and height at z=100 from the camera
     const geometry = new THREE.PlaneGeometry(
@@ -196,5 +196,59 @@ class CreateParticles {
 
     // Rotate the particle system
     this.particleSystem.rotation.y += 0.01;
+  }
+  
+}
+
+createText(){
+
+  let thePoints = [];
+
+  let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
+  let geometry = new THREE.ShapeGeometry( shapes );
+  geometry.computeBoundingBox();
+
+  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+  const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
+
+  geometry.center();
+
+  let holeShapes = [];
+
+  for ( let q = 0; q < shapes.length; q ++ ) {
+
+    let shape = shapes[ q ];
+
+    if ( shape.holes && shape.holes.length > 0 ) {
+
+      for ( let  j = 0; j < shape.holes.length; j ++ ) {
+
+        let  hole = shape.holes[ j ];
+        holeShapes.push( hole );
+      }
+    }
+
+  }
+  
+  shapes.push.apply( shapes, holeShapes );
+
+  let colors = [];
+  let sizes = [];
+        
+  for ( let  x = 0; x < shapes.length; x ++ ) {
+
+    let shape = shapes[ x ];
+
+    const amountPoints = ( shape.type == 'Path') ? this.data.amount/2 : this.data.amount;
+
+    let points = shape.getSpacedPoints( amountPoints ) ;
+
+    points.forEach( ( element, z ) => {
+          
+      const a = new THREE.Vector3( element.x, element.y, 0 );
+      thePoints.push( a );
+      sizes.push( 1 )
+
+     });
   }
 }
