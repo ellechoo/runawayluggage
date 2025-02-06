@@ -370,9 +370,7 @@ class Environment {
   // Now define the preload function AFTER the classes have been defined:
   
   const preload = () => {
-    let manager = new THREE.LoadingManager();
-    let typo = null;
-    let particle = null; // Initialize as null
+    
   
     // Load the texture from an external URL
     new THREE.TextureLoader(manager)
