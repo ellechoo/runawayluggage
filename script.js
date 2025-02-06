@@ -411,13 +411,3 @@ void main() {
   gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
 }
 `;
-
-// Example usage in a Three.js material
-const shaderMaterial = new THREE.ShaderMaterial({
-  uniforms: {
-    color: { value: new THREE.Color(0xffffff) },
-    pointTexture: { value: new THREE.TextureLoader().load('path/to/texture.png') }
-  },
-  vertexShader: vertexShader,
-  fragmentShader: fragmentShader,
-});
