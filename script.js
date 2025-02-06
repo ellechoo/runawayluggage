@@ -2,7 +2,7 @@ const preload = () => {
     let manager = new THREE.LoadingManager();
     
     let typo = null;
-    let particle = new THREE.TextureLoader(manager).load('https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png');
+    let particle = new THREE.TextureLoader().load('particle.png'); // Place particle.png in the same directory
 
     manager.onLoad = function() { 
         if (typo) {
@@ -388,29 +388,29 @@ if (document.readyState === "complete" || (document.readyState !== "loading" && 
   }  
 
 //from html
-  const vertexShader = 
-  attribute float size;
-  attribute vec3 customColor;
-  varying vec3 vColor;
+const vertexShader = `
+attribute float size;
+attribute vec3 customColor;
+varying vec3 vColor;
 
-  void main() {
-    vColor = customColor;
-    vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = size * (300.0 / -mvPosition.z);
-    gl_Position = projectionMatrix * mvPosition;
-  }
-;
+void main() {
+  vColor = customColor;
+  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+  gl_PointSize = size * (300.0 / -mvPosition.z);
+  gl_Position = projectionMatrix * mvPosition;
+}
+`;
 
-const fragmentShader = 
-  uniform vec3 color;
-  uniform sampler2D pointTexture;
-  varying vec3 vColor;
+const fragmentShader = `
+uniform vec3 color;
+uniform sampler2D pointTexture;
+varying vec3 vColor;
 
-  void main() {
-    gl_FragColor = vec4(color * vColor, 1.0);
-    gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
-  }
-;
+void main() {
+  gl_FragColor = vec4(color * vColor, 1.0);
+  gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+}
+`;
 
 // Example usage in a Three.js material
 const shaderMaterial = new THREE.ShaderMaterial({
