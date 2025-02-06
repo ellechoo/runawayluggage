@@ -150,6 +150,9 @@ class CreateParticles {
     geometry.computeBoundingBox();
     this.initialPositions = positions.slice(); // Store the original positions
 
+    let colors = [];
+    let sizes = [];
+    let positions = [];
 
     const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
     const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
@@ -171,10 +174,6 @@ class CreateParticles {
     
     shapes.push.apply(shapes, holeShapes);
 
-    let colors = [];
-    let sizes = [];
-    let positions = [];
-
     for (let x = 0; x < shapes.length; x++) {
       let shape = shapes[x];
 
@@ -189,6 +188,8 @@ class CreateParticles {
         colors.push(this.data.particleColor);
       });
     }
+    
+    this.initialPositions = [...positions];
 
     // geometry for the particle system
     let bufferGeometry = new THREE.BufferGeometry();
@@ -340,8 +341,7 @@ class CreateParticles {
         }
       } 
       pos.needsUpdate = true;
-      colors.needsUpdate = true;
-      size.needsUpdate = true;
+
     }
   }
 }
