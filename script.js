@@ -219,7 +219,7 @@ class CreateParticles {
   }
 
 
-  render() {
+  render(level) {
     if (!this.particles) {
       console.error("Particles not initialized yet!");
       return;
@@ -271,9 +271,48 @@ class CreateParticles {
         pos.setXYZ(i, px + dx * f, py + dy * f, pz + dz * f);
         
       }
+
+    }else{
+		    	
+      if( mouseDistance < this.data.area ){
+
+        if(i%5==0){
+
+         const t = Math.atan2( dy, dx );
+          px -= .03 * Math.cos( t );
+          py -= .03 * Math.sin( t );
+
+          this.colorChange.setHSL( .15 , 1.0 , .5 )
+          coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
+          coulors.needsUpdate = true;
+
+          size.array[ i ]  =  this.data.particleSize /1.2;
+          size.needsUpdate = true;
+
+        }else{
+
+          const t = Math.atan2( dy, dx );
+          px += f * Math.cos( t );
+          py += f * Math.sin( t );
+
+          pos.setXYZ( i, px, py, pz );
+          pos.needsUpdate = true;
+
+          size.array[ i ]  = this.data.particleSize * 1.3 ;
+          size.needsUpdate = true;
+        }
+
+       if ((px > (initX + 10)) || ( px < (initX - 10)) || (py > (initY + 10) || ( py < (initY - 10)))){
+          this.colorChange.setHSL( .15, 1.0 , .5 )
+          coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
+           coulors.needsUpdate = true;
+
+          size.array[ i ]  = this.data.particleSize /1.8;
+          size.needsUpdate = true;
+
+        }
+      } 
       pos.needsUpdate = true;
     }
-
   }
-
 }
