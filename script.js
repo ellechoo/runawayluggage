@@ -2,8 +2,7 @@ let manager;  // Declare the loading manager outside of preload()
 let typo = null;
 let particle = null; // Initialize the variable as null
 
-function preload () {
-    manager = new THREE.LoadingManager();  // Initialize manager here
+
 
     // Error handling for texture loading
     new THREE.TextureLoader(manager)
@@ -42,8 +41,8 @@ function preload () {
             console.error("Error: Some assets failed to load.");
         }
     };
-};
 
+    
 if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
     preload();
 } else {
