@@ -90,7 +90,7 @@ class CreateParticles {
     this.buttom = false;
 
     this.data = {
-      text: 'FUTURE\nIS NOW',
+      text: 'RUNAWAY\nLUGGAGE',
       amount: 1500,
       particleSize: 1,
       particleColor: 0xffffff,
@@ -130,6 +130,62 @@ class CreateParticles {
   
     // Create the text or particle system
     this.createText();
+  }
+
+  createText() {
+    let thePoints = {};
+    let shapes = this.font.generateShapes(this.data.text, this.data.textSize);
+    let geometry = new THREE.ShapeGeometry(shapes);
+    geometry.computeBoundingBox();
+
+    const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+    const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
+
+    geometry.center();
+
+    let holeShapes = [];
+
+    for (let q = 0; q < shapes.length; q++) {
+      let shape = shapes[q];
+
+      if (shape.holes && shape.holes.length > 0) {
+        for (let j = 0; j < shape.holes.length; j++) {
+          let hole = shape.holes[j];
+          holeShapes.push(hole);
+        }
+      }
+    }
+    
+    shapes.push.apply(shapes, holeShapes);
+
+    let positions = [];
+    for (let x = 0; x < shapes.length; x++) {
+      let shape = shapes[x];
+
+      const amountPoints = (shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
+
+      let points = shape.getSpacedPoints(amountPoints);
+
+      points.forEach((element, z) => {
+        positions.push(element.x, element.y, 0); // Add each point to positions
+      });
+    }
+
+    // Create geometry for the particle system
+    let bufferGeometry = new THREE.BufferGeometry();
+    bufferGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+    // Create a PointsMaterial using the texture passed into the class
+    const material = new THREE.PointsMaterial({
+      size: this.data.particleSize,
+      color: this.data.particleColor,
+      map: this.particleImg,
+      transparent: true
+    });
+
+    // Create the Points object (particle system) and add it to the scene
+    this.particles = new THREE.Points(bufferGeometry, material);
+    this.scene.add(this.particles);
   }
 
   bindEvents() {
@@ -198,7 +254,7 @@ class CreateParticles {
 
   }
 
-  // Create the text method (Moved inside the class)
+  
   createText() {
     let thePoints = [];
 
