@@ -412,16 +412,6 @@ const preload = () => {
       console.error("Error loading font:", error);
     }
   );
-
-  // Once all assets are loaded, create the Environment
-  let manager = new THREE.LoadingManager();
-  manager.onLoad = function() {
-    if (typo && particle) {
-      new Environment(typo, particle);
-    } else {
-      console.error("Error: Some assets failed to load.");
-    }
-  };
 };
 
 
