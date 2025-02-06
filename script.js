@@ -1,12 +1,13 @@
 const preload = () => {
   let manager = new THREE.LoadingManager();
-  manager.onLoad = function() {
-    // Once resources are loaded, initialize the environment
-    const environment = new Environment(typo, particle);
-  }
-
   let typo = null;
   let particle = null;
+
+  manager.onLoad = function() {
+    if (typo && particle) {
+      new Environment( typo, particle);
+    }
+  }
 
   const loader = new THREE.FontLoader(manager);
   loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function (font) {
@@ -185,6 +186,9 @@ class CreateParticles {
     // Create geometry for the particle system
     let bufferGeometry = new THREE.BufferGeometry();
     bufferGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    bufferGeometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    bufferGeometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+
 
     // Create a PointsMaterial using the texture passed into the class
     const material = new THREE.PointsMaterial({
