@@ -1,4 +1,3 @@
-let manager = new THREE.LoadingManager();
 let typo = null;
 let particle = null; // Initialize the variable as null
 
@@ -30,14 +29,8 @@ loader.load(
   }
 );
 
-// After loading assets, initialize the environment
-manager.onLoad = function() {
-  if (typo && particle) {
-    new Environment(typo, particle);  // Now `Environment` can be used
-  } else {
-    console.error("Error: Some assets failed to load.");
-  }
-};
+
+
 
 // Ensure `preload()` is called after the document is ready
 if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
@@ -414,6 +407,7 @@ const preload = () => {
   );
 
   // Once all assets are loaded, create the Environment
+  let manager = new THREE.LoadingManager();
   manager.onLoad = function() {
     if (typo && particle) {
       new Environment(typo, particle);
