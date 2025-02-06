@@ -9,8 +9,12 @@ function preload() {
     const loader = new THREE.TextureLoader();
     const fontLoader = new THREE.FontLoader();
 
+    console.log("Starting preload...");
+
     // Load particle texture
     loader.load('textures/particle.jpg', function(texture) {
+        console.log("Particle texture loaded");
+
         particleMaterial = new THREE.PointsMaterial({
             size: 0.1,
             map: texture,
@@ -24,6 +28,8 @@ function preload() {
 
     // Load font
     fontLoader.load('fonts/helvetiker_regular.typeface.json', function(font) {
+        console.log("Font loaded");
+
         const textGeometry = new THREE.TextGeometry('Hello, World!', {
             font: font,
             size: 1,
@@ -52,12 +58,15 @@ function preload() {
 // Check if all resources have been loaded
 function checkPreloadComplete() {
     if (particleMaterial && particleSystem) {
+        console.log("All resources loaded, proceeding with animation...");
         isPreloaded = true;
     }
 }
 
 // Initialize the scene
 function init() {
+    console.log("Initializing scene...");
+
     // Scene setup
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -70,9 +79,6 @@ function init() {
 
     // Start loading resources
     preload();
-
-    // Animation loop
-    animate();
 }
 
 // Animation loop
@@ -80,6 +86,7 @@ function animate() {
     // Wait for preload to finish
     if (!isPreloaded) {
         requestAnimationFrame(animate);
+        console.log("Waiting for preload...");
         return;
     }
 
@@ -95,4 +102,7 @@ function animate() {
 }
 
 // Initialize the scene when document is ready
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Document ready, initializing...");
+    init();
+});
