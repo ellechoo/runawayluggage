@@ -204,6 +204,11 @@ class CreateParticles {
   }
 
   render() {
+    if (!this.particles) {
+      console.error("Particles not initialized yet!");
+      return;
+    }
+    
     // Time-based calculations
     const time = ((.001 * performance.now()) % 12) / 12;
     const zigzagTime = (1 + Math.sin(time * 2 * Math.PI)) / 6;
