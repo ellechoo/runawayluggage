@@ -1,46 +1,51 @@
-let manager;  // Declare the loading manager outside of preload()
+let manager = new THREE.LoadingManager();
 let typo = null;
 let particle = null; // Initialize the variable as null
 
+// Error handling for texture loading
+new THREE.TextureLoader(manager)
+  .load(
+    'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png', // New texture path
+    (texture) => {
+      particle = texture; // Successfully loaded texture
+      console.log("Texture loaded successfully");
+    },
+    undefined, // Progress callback (optional)
+    (error) => {
+      console.error("Error loading texture:", error);
+    }
+  );
 
+// Load the font with error handling
+const loader = new THREE.FontLoader(manager);
+loader.load(
+  'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
+  function (font) {
+    typo = font;
+    console.log("Font loaded successfully");
+  },
+  undefined, // Progress callback (optional)
+  function (error) {
+    console.error("Error loading font:", error);
+  }
+);
 
-    // Error handling for texture loading
-    new THREE.TextureLoader(manager)
-    .load(
-        'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png', // New texture path 
-        (texture) => {
-            particle = texture; // Successfully loaded texture
-            console.log("Texture loaded successfully");
-        },
-        undefined, // Progress callback (optional)
-        (error) => {
-            console.error("Error loading texture:", error);
-            // Optionally set a fallback texture or handle the error here
-        }
-    );
+// After loading assets, initialize the environment
+manager.onLoad = function() {
+  if (typo && particle) {
+    new Environment(typo, particle);  // Now `Environment` can be used
+  } else {
+    console.error("Error: Some assets failed to load.");
+  }
+};
 
-    // Load the font with error handling
-    const loader = new THREE.FontLoader(manager);
-    loader.load(
-        'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
-        function (font) { 
-            typo = font;
-            console.log("Font loaded successfully");
-        },
-        undefined, // Progress callback (optional)
-        function (error) {
-            console.error("Error loading font:", error);
-        }
-    );
-
-    // After loading assets, initialize the environment
-    manager.onLoad = function() { 
-        if (typo && particle) {
-            new Environment(typo, particle);  // Now `Environment` can be used
-        } else {
-            console.error("Error: Some assets failed to load.");
-        }
-    };
+// Ensure `preload()` is called after the document is ready
+if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+  preload();
+} else {
+  document.addEventListener("DOMContentLoaded", preload);
+}
+//changes up
 
     
 if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
@@ -367,48 +372,51 @@ class Environment {
   }
   `;
   
-  // Now define the preload function AFTER the classes have been defined:
+
+
   
-  const preload = () => {
-    
-  
-    // Load the texture from an external URL
-    new THREE.TextureLoader(manager)
-      .load(
-        'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png',
-        (texture) => {
-          particle = texture;
-          console.log("Texture loaded successfully");
-        },
-        undefined,
-        (error) => {
-          console.error("Error loading texture:", error);
-        }
-      );
-  
-    // Load the font
-    const loader = new THREE.FontLoader(manager);
-    loader.load(
-      'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
-      function(font) {
-        typo = font;
-        console.log("Font loaded successfully");
+// Preload function definition (ensure it's placed after class definitions)
+const preload = () => {
+  // Load the texture from an external URL
+  new THREE.TextureLoader(manager)
+    .load(
+      'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png',
+      (texture) => {
+        particle = texture;
+        console.log("Texture loaded successfully");
       },
       undefined,
-      function(error) {
-        console.error("Error loading font:", error);
+      (error) => {
+        console.error("Error loading texture:", error);
       }
     );
-  
-    // Once all assets are loaded, create the Environment
-    manager.onLoad = function() {
-      if (typo && particle) {
-        new Environment(typo, particle);
-      } else {
-        console.error("Error: Some assets failed to load.");
-      }
-    };
+
+  // Load the font
+  const loader = new THREE.FontLoader(manager);
+  loader.load(
+    'https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json',
+    function (font) {
+      typo = font;
+      console.log("Font loaded successfully");
+    },
+    undefined,
+    function (error) {
+      console.error("Error loading font:", error);
+    }
+  );
+
+  // Once all assets are loaded, create the Environment
+  manager.onLoad = function() {
+    if (typo && particle) {
+      new Environment(typo, particle);
+    } else {
+      console.error("Error: Some assets failed to load.");
+    }
   };
+};
+
+
+
   
   // Run preload when the document is ready
   if (
