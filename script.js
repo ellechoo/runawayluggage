@@ -1,125 +1,74 @@
+// Check if document is ready or load when DOM is complete
+if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+  preload();
+} else {
+  document.addEventListener("DOMContentLoaded", preload);
+}
+
+// Preload function
+const preload = () => {
+  let manager = new THREE.LoadingManager();
+  manager.onLoad = function() {
+    // Once resources are loaded, initialize the environment
+    const environment = new Environment(typo, particle);
+  }
+
+  var typo = null;
+  const loader = new THREE.FontLoader(manager);
+  loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function (font) {
+    typo = font;
+  });
+
+  const particle = new THREE.TextureLoader(manager).load('https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png');
+}
+
+// Environment Class
 class Environment {
-  constructor() {
-    this.particles = [];
-    this.particleCount = 2000;
-    this.isPreloaded = false;
-    this.particleGeometry = null;
-    this.particleMaterial = null;
-    this.particleSystem = null;
-    this.scene = new THREE.Scene();
-    this.camera = null;
-    this.renderer = null;
+  constructor(font, particle) {
+    this.font = font;
+    this.particle = particle;
     this.container = document.querySelector('#magic');
-    
-    this.preload();
+    this.scene = new THREE.Scene();
+    this.createCamera();
+    this.createRenderer();
     this.setup();
     this.bindEvents();
   }
 
-  createCamera() {
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.z = 5;
-  }
-
-  createRenderer() {
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(this.renderer.domElement);
+  bindEvents() {
+    window.addEventListener('resize', this.onWindowResize.bind(this));
   }
 
   setup() {
-    this.createCamera();
-    this.createRenderer();
+    // Create particles in the scene
+    this.createParticles = new CreateParticles(this.scene, this.font, this.particle, this.camera, this.renderer);
   }
 
-  bindEvents() {
-    window.addEventListener("resize", () => {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+  render() {
+    // Render particles and scene
+    this.createParticles.render();
+    this.renderer.render(this.scene, this.camera);
+  }
+
+  createCamera() {
+    this.camera = new THREE.PerspectiveCamera(65, this.container.clientWidth / this.container.clientHeight, 1, 10000);
+    this.camera.position.set(0, 0, 100);
+  }
+
+  createRenderer() {
+    this.renderer = new THREE.WebGLRenderer();
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.container.appendChild(this.renderer.domElement);
+    this.renderer.setAnimationLoop(() => {
+      this.render();
     });
   }
 
-  preload() {
-    const loader = new THREE.TextureLoader();
-    const fontLoader = new THREE.FontLoader();
-    console.log("Starting preload...");
-
-    loader.load(
-      "https://threejs.org/examples/textures/sprites/circle.png",
-      (texture) => {
-        console.log("Particle texture loaded");
-        this.particleMaterial = new THREE.PointsMaterial({
-          size: 0.1,
-          map: texture,
-          blending: THREE.AdditiveBlending,
-          transparent: true
-        });
-        this.checkPreloadComplete();
-      },
-      undefined,
-      (error) => {
-        console.error("Error loading particle texture:", error);
-      }
-    );
-
-    fontLoader.load(
-      "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
-      (font) => {
-        console.log("Font loaded");
-        const textGeometry = new THREE.TextGeometry("Hello, World!", {
-          font: font,
-          size: 1,
-          height: 0.1
-        });
-
-        const vertices = textGeometry.attributes.position.array;
-        for (let i = 0; i < vertices.length; i += 3) {
-          this.particles.push(new THREE.Vector3(vertices[i], vertices[i + 1], vertices[i + 2]));
-        }
-        this.checkPreloadComplete();
-      },
-      undefined,
-      (error) => {
-        console.error("Error loading font:", error);
-      }
-    );
-  }
-
-  checkPreloadComplete() {
-    if (this.particleMaterial && this.particles.length > 0 && !this.particleSystem) {
-      console.log("All resources loaded, proceeding with animation...");
-      this.isPreloaded = true;
-
-      // Create and add particle system
-      this.particleGeometry = new THREE.BufferGeometry().setFromPoints(this.particles);
-      this.particleSystem = new THREE.Points(this.particleGeometry, this.particleMaterial);
-      this.scene.add(this.particleSystem);
-    }
-  }
-
-  animate() {
-    if (!this.isPreloaded) {
-      requestAnimationFrame(this.animate.bind(this));
-      console.log("Waiting for preload...");
-      return;
-    }
-
-    if (this.particleSystem) {
-      this.particleSystem.rotation.x += 0.01;
-      this.particleSystem.rotation.y += 0.01;
-    }
-
-    this.renderer.render(this.scene, this.camera);
-    requestAnimationFrame(this.animate.bind(this));
+  onWindowResize() {
+    this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
   }
 }
-
-// Run when the document is ready
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Document ready, initializing...");
-  setTimeout(() => {
-    const env = new Environment();
-    env.animate();
-  }, 500);
-});
