@@ -1,4 +1,5 @@
-let manager = new THREE.LoadingManager();
+let manager = new THREE.LoadingManager()
+
 let typo = null;
 let particle = null; // Initialize the variable as null
 
@@ -81,14 +82,6 @@ loader.load(
 );
 
 
-
-
-// Ensure `preload()` is called after the document is ready
-if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
-  preload();
-} else {
-  document.addEventListener("DOMContentLoaded", preload);
-}
 
 //magic check
 this.container = document.querySelector('#magic');
