@@ -189,9 +189,11 @@ class CreateParticles {
         const mouseDistance = this.distance(mx, my, px, py);
         let d = (dx = mx - px) * dx + (dy = my - py) * dy;
         const f = -this.data.area / d;
-
+        
+        pos.setXYZ(i, px + dx * f, py + dy * f, pz + dz * f);
         
       }
+      pos.needsUpdate = true;
     }
 
   }
