@@ -154,6 +154,52 @@ class CreateParticles {
   }
 
   render() {
+    // Time-based calculations
+    const time = ((.001 * performance.now()) % 12) / 12;
+    const zigzagTime = (1 + Math.sin(time * 2 * Math.PI)) / 6;
+
+    // Raycast setup
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+
+    const intersects = this.raycaster.intersectObject(this.planeArea);
+
+    if (intersects.length > 0) {
+      const pos = this.particleSystem.geometry.attributes.position;
+      const copy = this.geometryCopy.attributes.position;
+      const colors = this.particleSystem.geometry.attributes.customColor;
+      const size = this.particleSystem.geometry.attributes.size;
+
+      const mx = intersects[0].point.x;
+      const my = intersects[0].point.y;
+      const mz = intersects[0].point.z;
+
+      for (let i = 0, l = pos.count; i < l; i++) {
+        const initX = copy.getX(i);
+        const initY = copy.getY(i);
+        const initZ = copy.getZ(i);
+
+        let px = pos.getX(i);
+        let py = pos.getY(i);
+        let pz = pos.getZ(i);
+
+        this.colorChange.setHSL(0.5, 1, 1);
+        colors.setXYZ(i, this.colorChange.r, this.colorChange.g, this.colorChange.b);
+        colors.needsUpdate = true;
+
+        size.array[i] = this.data.particleSize;
+        size.needsUpdate = true;
+
+        let dx = mx - px;
+        let dy = my - py;
+        const dz = mz - pz;
+
+        const mouseDistance = this.distance(mx, my, px, py);
+        let d = (dx = mx - px) * dx + (dy = my - py) * dy;
+        const f = -this.data.area / d;
+      }
+    }
+
+    // Rotate the particle system
     this.particleSystem.rotation.y += 0.01;
   }
 }
