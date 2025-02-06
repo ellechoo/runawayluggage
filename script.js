@@ -3,6 +3,7 @@ let particles = [];
 let particleCount = 2000;
 let particleGeometry, particleMaterial, particleSystem;
 
+// Preload function defined before init
 function preload() {
     // Loading manager to ensure all resources are loaded before rendering
     const loader = new THREE.TextureLoader();
