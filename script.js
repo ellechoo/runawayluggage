@@ -73,7 +73,7 @@ class Environment {
   }
 }
 
-// CreateParticles Class
+
 class CreateParticles {
   constructor(scene, font, particleImg, camera, renderer) {
     this.scene = scene;
@@ -154,8 +154,6 @@ class CreateParticles {
   }
 
   render() {
-    // Update raycasting and particle system
-    this.raycaster.update();
     this.particleSystem.rotation.y += 0.01;
   }
 }
