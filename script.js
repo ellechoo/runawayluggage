@@ -268,7 +268,10 @@ class CreateParticles {
         let dy = my - py;
         const dz = mz - pz;
 
-        const mouseDistance = this.distance(mx, my, px, py);
+        
+
+        let mouseDistance = this.distance(mx, my, px, py);
+
         let d = (dx = mx - px) * dx + (dy = my - py) * dy;
         const f = -this.data.area / d;
         
@@ -287,8 +290,8 @@ class CreateParticles {
           py -= .03 * Math.sin( t );
 
           this.colorChange.setHSL( .15 , 1.0 , .5 )
-          coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-          coulors.needsUpdate = true;
+          colors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
+          colors.needsUpdate = true;
 
           size.array[ i ]  =  this.data.particleSize /1.2;
           size.needsUpdate = true;
@@ -308,8 +311,8 @@ class CreateParticles {
 
        if ((px > (initX + 10)) || ( px < (initX - 10)) || (py > (initY + 10) || ( py < (initY - 10)))){
           this.colorChange.setHSL( .15, 1.0 , .5 )
-          coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-           coulors.needsUpdate = true;
+          colors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
+           colors.needsUpdate = true;
 
           size.array[ i ]  = this.data.particleSize /1.8;
           size.needsUpdate = true;
