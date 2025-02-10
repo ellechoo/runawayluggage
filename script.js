@@ -149,6 +149,11 @@ class CreateParticles {
 		const time = ((.001 * performance.now())%12)/12;
 		const zigzagTime = (1 + (Math.sin( time * 2 * Math.PI )))/6;
 
+		if (this.camera) {  // Ensure this.camera is defined before accessing it
+			const height = this.visibleHeightAtZDepth(100, this.camera);
+			const width = this.visibleWidthAtZDepth(100, this.camera);
+		}
+
 		this.raycaster.setFromCamera( this.mouse, this.camera );
 
 		const intersects = this.raycaster.intersectObject( this.planeArea );
