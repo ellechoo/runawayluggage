@@ -50,12 +50,17 @@ class Environment {
 
     this.createParticles = new CreateParticles( this.scene, this.font1, this.font2, this.particle, this.camera, this.renderer );
   }
+  
+
 
   render() {
-    
-     this.createParticles.render()
-     this.renderer.render( this.scene, this.camera )
+	if (this.createParticles) {
+	  this.createParticles.render();
+	}
+	this.renderer.render(this.scene, this.camera);
   }
+  
+
 
   createCamera() {
 
