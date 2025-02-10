@@ -10,12 +10,12 @@ const preload = () => {
   }
 
   const loader = new THREE.FontLoader(manager);
-  loader.load('https://raw.githubusercontent.com/ellechoo/runawayluggage/refs/heads/main/fonts/j%20Jackgo_Regular.json', function (font) {
+  loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function (font) {
     typo = font;
   });
 
   const particleLoader = new THREE.TextureLoader(manager);
-  particleLoader.load('https://raw.githubusercontent.com/ellechoo/runawayluggage/refs/heads/main/fonts/j%20Jackgo_Regular.json', function(texture) {
+  particleLoader.load('https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png', function(texture) {
     particle = texture;
   });
 }

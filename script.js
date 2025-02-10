@@ -8,11 +8,11 @@ const preload = () => {
   var typo1 = null, typo2 = null;
   const loader = new THREE.FontLoader( manager );
 
-  loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function ( font ) { 
+  loader.load('https://raw.githubusercontent.com/ellechoo/runawayluggage/main/fonts/j%20Jackgo_Regular.json', function ( font ) { 
     typo1 = font; 
   });
 
-  loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font2.json', function ( font ) { 
+  loader.load('https://raw.githubusercontent.com/ellechoo/runawayluggage/main/fonts/j%20Jackgo_Regular.json', function ( font ) { 
     typo2 = font; 
   });
 
