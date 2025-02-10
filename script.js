@@ -2,12 +2,20 @@ const preload = () => {
 
   let manager = new THREE.LoadingManager();
   manager.onLoad = function() { 
-    const environment = new Environment( typo, particle );
+    const environment = new Environment( typo1, typo2, particle );
   }
 
-  var typo = null;
+  var typo1 = null, typo2 = null;
   const loader = new THREE.FontLoader( manager );
-  const font = loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function ( font ) { typo = font; });
+
+  loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function ( font ) { 
+    typo1 = font; 
+  });
+
+  loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font2.json', function ( font ) { 
+    typo2 = font; 
+  });
+
   const particle = new THREE.TextureLoader( manager ).load( 'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png');
 
 }
@@ -19,9 +27,10 @@ else
 
 class Environment {
 
-  constructor( font, particle ){ 
+  constructor( font1, font2, particle ){ 
 
-    this.font = font;
+    this.font1 = font1;
+	this.font2 = font2;
     this.particle = particle;
     this.container = document.querySelector( '#magic' );
     this.scene = new THREE.Scene();
@@ -39,7 +48,7 @@ class Environment {
 
   setup(){ 
 
-    this.createParticles = new CreateParticles( this.scene, this.font,             this.particle, this.camera, this.renderer );
+    this.createParticles = new CreateParticles( this.scene, this.font1, this.font2, this.particle, this.camera, this.renderer );
   }
 
   render() {
@@ -256,6 +265,13 @@ class CreateParticles {
 	createText(){ 
 
 		let thePoints = [];
+
+		//changes
+		let words = this.data.text.split("\n");
+		let fonts = [this.font1, this.font2];
+		let xOffset = 0;
+		xOffset += geometry.boundingBox.max.x - geometry.boundingBox.min.x +20;
+
 
 		let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
 		let geometry = new THREE.ShapeGeometry( shapes );
