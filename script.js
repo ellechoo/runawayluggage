@@ -279,44 +279,42 @@ const preload = () => {
 	  }
   
 
-	  createText(){ 
-  
+	  
+	  createText() {
 		let geometry = new THREE.TextGeometry(this.data.text, {
 			font: this.font,
 			size: this.data.textSize,
-			height: 1, // depth to prevent zero thickness
+			height: 1, // Prevent zero thickness
 			curveSegments: 10,
 			bevelEnabled: false
 		});
 	
-		geometry.computeBoundingBox(); 
+		geometry.computeBoundingBox();
+		geometry.computeVertexNormals(); // Helps with shading and particle placement
 	
 		let thePoints = [];
 		let colors = [];
 		let sizes = [];
 	
-		// Get bounding box for full-volume filling
-		let min = geometry.boundingBox.min;
-		let max = geometry.boundingBox.max;
+		// Get position attribute to sample points
+		let positionAttribute = geometry.attributes.position;
+		let numVertices = positionAttribute.count;
 	
-		let numParticles = 10000; // Increase this for denser fill
+		let numParticles = Math.min(10000, numVertices); // Prevent excessive particles
 	
 		for (let i = 0; i < numParticles; i++) {
-			let x = THREE.MathUtils.lerp(min.x, max.x, Math.random());
-			let y = THREE.MathUtils.lerp(min.y, max.y, Math.random());
-			let z = THREE.MathUtils.lerp(min.z, max.z, Math.random());
+			let index = Math.floor(Math.random() * numVertices); // Random vertex index
+			let x = positionAttribute.getX(index);
+			let y = positionAttribute.getY(index);
+			let z = positionAttribute.getZ(index);
 	
-			let point = new THREE.Vector3(x, y, z);
-			
-			// Check if point is inside the geometry (avoiding outside points)
-			if (geometry.boundingBox.containsPoint(point)) {
-				thePoints.push(point);
-				colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
-				sizes.push(1);
-			}
+			thePoints.push(x, y, z);
+			colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
+			sizes.push(1);
 		}
 	
-		let geoParticles = new THREE.BufferGeometry().setFromPoints(thePoints);
+		let geoParticles = new THREE.BufferGeometry();
+		geoParticles.setAttribute('position', new THREE.Float32BufferAttribute(thePoints, 3));
 		geoParticles.setAttribute('customColor', new THREE.Float32BufferAttribute(colors, 3));
 		geoParticles.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
 	
@@ -338,10 +336,11 @@ const preload = () => {
 		this.geometryCopy = new THREE.BufferGeometry();
 		this.geometryCopy.copy(this.particles.geometry);
 	}
+	
 
 	
   
-		visibleHeightAtZDepth ( depth, camera ) {
+	visibleHeightAtZDepth ( depth, camera ) {
   
 		const cameraOffset = camera.position.z;
 		if ( depth < cameraOffset ) depth -= cameraOffset;
@@ -350,17 +349,17 @@ const preload = () => {
 		const vFOV = camera.fov * Math.PI / 180; 
   
 		return 2 * Math.tan( vFOV / 2 ) * Math.abs( depth );
-	  }
+	}
   
-	  visibleWidthAtZDepth( depth, camera ) {
+	visibleWidthAtZDepth( depth, camera ) {
   
 		const height = this.visibleHeightAtZDepth( depth, camera );
 		return height * camera.aspect;
   
-	  }
-  
-	  distance (x1, y1, x2, y2){
-		 
-		  return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
-	  }
 	}
+  
+	distance (x1, y1, x2, y2){
+		 
+		return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+	}
+}
