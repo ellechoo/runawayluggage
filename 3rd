@@ -282,14 +282,8 @@ const preload = () => {
   
 		  let thePoints = [];
   
-		  let geometry = new THREE.TextGeometry(this.data.text, {
-			font: this.font,
-			size: this.data.textSize,
-			height: 1, // depth to prevent zero thickness
-			curveSegments: 10,
-			bevelEnabled: false
-		  });		  
-		  
+		  let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
+		  let geometry = new THREE.ShapeGeometry( shapes );
 		  geometry.computeBoundingBox();
 	  
 		  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
