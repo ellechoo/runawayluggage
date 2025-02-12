@@ -7,7 +7,7 @@ const preload = () => {
   
 	var typo = null;
 	const loader = new THREE.FontLoader( manager );
-	const font = loader.load('https://res.cloudinary.com/dydre7amr/raw/upload/v1612950355/font_zsd4dr.json', function ( font ) { typo = font; });
+	const font = loader.load('https://raw.githubusercontent.com/ellechoo/runawayluggage/refs/heads/main/fonts/j%20Jackgo_Regular.json', function ( font ) { typo = font; });
 	const particle = new THREE.TextureLoader( manager ).load( 'https://res.cloudinary.com/dfvtkoboz/image/upload/v1605013866/particle_a64uzf.png');
   
   }
