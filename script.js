@@ -280,8 +280,10 @@ const preload = () => {
   
 	  createText(){ 
   
-  
-		  let geometry = new THREE.TextGeometry(this.data.text, {
+		let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
+		
+		  
+		let geometry = new THREE.TextGeometry(this.data.text, {
 			font: this.font,
 			size: this.data.textSize,
 			height: 1,
