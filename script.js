@@ -280,17 +280,42 @@ const preload = () => {
   
 	  createText(){ 
   
-		  let thePoints = [];
   
 		  let geometry = new THREE.TextGeometry(this.data.text, {
 			font: this.font,
 			size: this.data.textSize,
-			height: 1, // depth to prevent zero thickness
+			height: 1,
 			curveSegments: 10,
 			bevelEnabled: false
 		  });		  
 		  
 		  geometry.computeBoundingBox();
+
+
+			//new
+		  let vertices = geometry.attributes.position.array;
+		  let thePoints = [];
+		  let colors = [];
+		  let sizes = [];
+		  
+		  for (let i = 0; i < vertices.length; i += 3) {
+			  let x = vertices[i];
+			  let y = vertices[i + 1];
+			  let z = vertices[i + 2];
+		  
+			  // Add some random offset to fill the inside
+			  let randomOffset = 0.5;  // Adjust this for denser or sparser filling
+			  let newX = x + (Math.random() - 0.5) * randomOffset;
+			  let newY = y + (Math.random() - 0.5) * randomOffset;
+			  let newZ = z + (Math.random() - 0.5) * randomOffset;
+		  
+			  thePoints.push(new THREE.Vector3(newX, newY, newZ));
+			  colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
+			  sizes.push(1);
+		  }
+		  
+
+
 	  
 		  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
 		  const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
@@ -315,8 +340,7 @@ const preload = () => {
 		  }
 		  shapes.push.apply( shapes, holeShapes );
   
-		  let colors = [];
-		  let sizes = [];
+
 					  
 		  for ( let  x = 0; x < shapes.length; x ++ ) {
   
