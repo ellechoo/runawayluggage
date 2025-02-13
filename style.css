@@ -58,7 +58,87 @@ a {
 }
 
 
-.letter-button {
+.letter-button-home {
+  font-family: 'Roboto', sans-serif; 
+  font-size: 50px; 
+  width: auto; 
+  height: auto; 
+  color: white; 
+  border: none; 
+  background: none;
+  padding: 0; 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  z-index: 2;
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
+}
+
+.letter-button-1 {
+  font-family: 'Roboto', sans-serif; 
+  font-size: 50px; 
+  width: auto; 
+  height: auto; 
+  color: white; 
+  border: none; 
+  background: none;
+  padding: 0; 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  z-index: 2;
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
+}
+
+.letter-button-2 {
+  font-family: 'Roboto', sans-serif; 
+  font-size: 50px; 
+  width: auto; 
+  height: auto; 
+  color: white; 
+  border: none; 
+  background: none;
+  padding: 0; 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  z-index: 2;
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
+}
+
+.letter-button-3 {
+  font-family: 'Roboto', sans-serif; 
+  font-size: 50px; 
+  width: auto; 
+  height: auto; 
+  color: white; 
+  border: none; 
+  background: none;
+  padding: 0; 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  z-index: 2;
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
+}
+
+.letter-button-4 {
   font-family: 'Roboto', sans-serif; 
   font-size: 50px; 
   width: auto; 
@@ -85,7 +165,7 @@ section {
 }
 
 
-.letter-button-2 {
+.letter-button-end {
   font-family: 'Roboto', sans-serif;
   font-size: 50px; 
   width: auto;
