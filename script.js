@@ -97,7 +97,7 @@ const preload = () => {
         
         this.data = {
     
-            text: 'RUNAWAY\nLUGGAGE',
+            text: 'runaway\nluggage.',
             amount: 1600,
             particleSize: 1,
             particleColor: 0xffffff,
