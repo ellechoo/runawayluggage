@@ -115,7 +115,7 @@ const preload = () => {
 	  setup(){
   
 		  const geometry = new THREE.PlaneGeometry( this.visibleWidthAtZDepth( 100, this.camera ), this.visibleHeightAtZDepth( 100, this.camera ));
-		  const material = new THREE.MeshBasicMaterial( { color: 0x00ff00, transparent: true } );
+		  const material = new THREE.MeshBasicMaterial( { color: 0x000000, transparent: true } );
 		  this.planeArea = new THREE.Mesh( geometry, material );
 		  this.planeArea.visible = false;
 		  this.createText();
