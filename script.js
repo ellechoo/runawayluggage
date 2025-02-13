@@ -278,65 +278,119 @@ const preload = () => {
 		  }
 	  }
   
-
-	  //new
-	  createText() {
+	  createText(){ 
+  
+		let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
+		
+		  
 		let geometry = new THREE.TextGeometry(this.data.text, {
 			font: this.font,
 			size: this.data.textSize,
-			height: 5, // Increased thickness for a filled look
+			height: 1,
 			curveSegments: 10,
 			bevelEnabled: false
-		});
-	
-		geometry.computeBoundingBox();
-		geometry.computeVertexNormals(); // Helps with shading
-	
-		// Convert TextGeometry to BufferGeometry to access vertex data
-		let bufferGeometry = new THREE.BufferGeometry().fromGeometry(geometry);
-		let positionAttribute = bufferGeometry.attributes.position;
-		
-		if (!positionAttribute) {
-			console.error("Position attribute is undefined. Geometry may not be generated correctly.");
-			return;
-		}
-	
-		let numVertices = positionAttribute.count;
-		let numParticles = Math.min(10000, numVertices); // Adjust for density
-		let thePoints = [];
-	
-		for (let i = 0; i < numParticles; i++) {
-			let index = Math.floor(Math.random() * numVertices); // Random vertex index
-			let x = positionAttribute.getX(index);
-			let y = positionAttribute.getY(index);
-			let z = positionAttribute.getZ(index);
-	
-			thePoints.push(x, y, z);
-		}
-	
-		let geoParticles = new THREE.BufferGeometry();
-		geoParticles.setAttribute('position', new THREE.Float32BufferAttribute(thePoints, 3));
-	
-		const material = new THREE.ShaderMaterial({
-			uniforms: {
-				color: { value: new THREE.Color(0xffffff) },
-				pointTexture: { value: this.particleImg }
-			},
-			vertexShader: document.getElementById('vertexshader').textContent,
-			fragmentShader: document.getElementById('fragmentshader').textContent,
-			blending: THREE.AdditiveBlending,
-			depthTest: false,
-			transparent: true,
-		});
-	
-		this.particles = new THREE.Points(geoParticles, material);
-		this.scene.add(this.particles);
-	}	
-	
+		  });		  
+		  
+		  geometry.computeBoundingBox();
 
-	
+
+			//new
+		  let vertices = geometry.attributes.position.array;
+		  let thePoints = [];
+		  let colors = [];
+		  let sizes = [];
+		  
+		  for (let i = 0; i < vertices.length; i += 3) {
+			  let x = vertices[i];
+			  let y = vertices[i + 1];
+			  let z = vertices[i + 2];
+		  
+			  // Add some random offset to fill the inside
+			  let randomOffset = 0.5;  // Adjust this for denser or sparser filling
+			  let newX = x + (Math.random() - 0.5) * randomOffset;
+			  let newY = y + (Math.random() - 0.5) * randomOffset;
+			  let newZ = z + (Math.random() - 0.5) * randomOffset;
+		  
+			  thePoints.push(new THREE.Vector3(newX, newY, newZ));
+			  colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
+			  sizes.push(1);
+		  }
+		  
+
+
+	  
+		  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+		  const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
   
-	visibleHeightAtZDepth ( depth, camera ) {
+		  geometry.center();
+  
+		  let holeShapes = [];
+  
+		  for ( let q = 0; q < shapes.length; q ++ ) {
+  
+			  let shape = shapes[ q ];
+  
+			  if ( shape.holes && shape.holes.length > 0 ) {
+  
+				  for ( let  j = 0; j < shape.holes.length; j ++ ) {
+  
+					  let  hole = shape.holes[ j ];
+					  holeShapes.push( hole );
+				  }
+			  }
+  
+		  }
+		  shapes.push.apply( shapes, holeShapes );
+  
+
+					  
+		  for ( let  x = 0; x < shapes.length; x ++ ) {
+  
+			  let shape = shapes[ x ];
+  
+			  const amountPoints = ( shape.type == 'Path') ? this.data.amount/2 : this.data.amount;
+  
+			  let points = shape.getSpacedPoints( amountPoints ) ;
+  
+			  points.forEach( ( element, z ) => {
+						  
+				  const a = new THREE.Vector3( element.x, element.y, 0 );
+				  thePoints.push( a );
+				  colors.push( this.colorChange.r, this.colorChange.g, this.colorChange.b);
+				  sizes.push( 1 )
+  
+				  });
+		  }
+  
+		  let geoParticles = new THREE.BufferGeometry().setFromPoints( thePoints );
+		  geoParticles.translate( xMid, yMid, 0 );
+				  
+		  geoParticles.setAttribute( 'customColor', new THREE.Float32BufferAttribute( colors, 3 ) );
+		  geoParticles.setAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1) );
+  
+		  const material = new THREE.ShaderMaterial( {
+  
+			  uniforms: {
+				  color: { value: new THREE.Color( 0xffffff ) },
+				  pointTexture: { value: this.particleImg }
+			  },
+			  vertexShader: document.getElementById( 'vertexshader' ).textContent,
+			  fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
+  
+			  blending: THREE.AdditiveBlending,
+			  depthTest: false,
+			  transparent: true,
+		  } );
+  
+		  this.particles = new THREE.Points( geoParticles, material );
+		  this.scene.add( this.particles );
+  
+		  this.geometryCopy = new THREE.BufferGeometry();
+		  this.geometryCopy.copy( this.particles.geometry );
+		  
+	  }
+  
+	  visibleHeightAtZDepth ( depth, camera ) {
   
 		const cameraOffset = camera.position.z;
 		if ( depth < cameraOffset ) depth -= cameraOffset;
@@ -345,17 +399,17 @@ const preload = () => {
 		const vFOV = camera.fov * Math.PI / 180; 
   
 		return 2 * Math.tan( vFOV / 2 ) * Math.abs( depth );
-	}
+	  }
   
-	visibleWidthAtZDepth( depth, camera ) {
+	  visibleWidthAtZDepth( depth, camera ) {
   
 		const height = this.visibleHeightAtZDepth( depth, camera );
 		return height * camera.aspect;
   
-	}
+	  }
   
-	distance (x1, y1, x2, y2){
+	  distance (x1, y1, x2, y2){
 		 
-		return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+		  return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
+	  }
 	}
-}
