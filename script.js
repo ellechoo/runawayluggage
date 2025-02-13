@@ -278,117 +278,108 @@ const preload = () => {
 		  }
 	  }
   
-	  createText(){ 
-  
-		let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
-		
-		  
-		let geometry = new THREE.TextGeometry(this.data.text, {
-			font: this.font,
-			size: this.data.textSize,
-			height: 1,
-			curveSegments: 10,
-			bevelEnabled: false
-		  });		  
-		  
-		  geometry.computeBoundingBox();
 
-
-			//new
-		  let vertices = geometry.attributes.position.array;
-		  let thePoints = [];
-		  let colors = [];
-		  let sizes = [];
-		  
-		  for (let i = 0; i < vertices.length; i += 3) {
-			  let x = vertices[i];
-			  let y = vertices[i + 1];
-			  let z = vertices[i + 2];
-		  
-			  // Add some random offset to fill the inside
-			  let randomOffset = 0.5;  // Adjust this for denser or sparser filling
-			  let newX = x + (Math.random() - 0.5) * randomOffset;
-			  let newY = y + (Math.random() - 0.5) * randomOffset;
-			  let newZ = z + (Math.random() - 0.5) * randomOffset;
-		  
-			  thePoints.push(new THREE.Vector3(newX, newY, newZ));
-			  colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
-			  sizes.push(1);
-		  }
-		  
-
-
+	  ///new
 	  
-		  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-		  const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
-  
-		  geometry.center();
-  
-		  let holeShapes = [];
-  
-		  for ( let q = 0; q < shapes.length; q ++ ) {
-  
-			  let shape = shapes[ q ];
-  
-			  if ( shape.holes && shape.holes.length > 0 ) {
-  
-				  for ( let  j = 0; j < shape.holes.length; j ++ ) {
-  
-					  let  hole = shape.holes[ j ];
-					  holeShapes.push( hole );
-				  }
-			  }
-  
-		  }
-		  shapes.push.apply( shapes, holeShapes );
-  
+	  createText() {
+		let thePoints = [];
+		let colors = [];
+		let sizes = [];
+	
+		// Generate shapes for the text
+		let shapes = this.font.generateShapes(this.data.text, this.data.textSize);
+		let geometry = new THREE.ShapeGeometry(shapes);
+		geometry.computeBoundingBox();
+	
+		const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+		const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
+	
+		geometry.center();
+	
+		let holeShapes = [];
+	
+		for (let q = 0; q < shapes.length; q++) {
+			let shape = shapes[q];
+	
+			if (shape.holes && shape.holes.length > 0) {
+				for (let j = 0; j < shape.holes.length; j++) {
+					let hole = shape.holes[j];
+					holeShapes.push(hole);
+				}
+			}
+		}
+		shapes.push.apply(shapes, holeShapes);
+	
+		// Find the index of the letter "E" in "LUGGAGE"
+		// Assuming the text is "RUNAWAY\nLUGGAGE", the "E" is in the second line
+		let eIndex = -1;
+		for (let i = 0; i < shapes.length; i++) {
+			if (shapes[i].userData && shapes[i].userData.isE) {
+				eIndex = i;
+				break;
+			}
+		}
+	
+		// Filter out points for unwanted letters
+		for (let x = 0; x < shapes.length; x++) {
+			let shape = shapes[x];
+	
+			const amountPoints = (shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
+			let points = shape.getSpacedPoints(amountPoints);
+	
+			points.forEach((element, z) => {
+				// Keep only the points for the letter "E"
+				if (x === eIndex) {
+					const a = new THREE.Vector3(element.x, element.y, 0);
+					thePoints.push(a);
+					colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
+					sizes.push(1);
+				}
+			});
+		}
+	
+		let geoParticles = new THREE.BufferGeometry().setFromPoints(thePoints);
+		geoParticles.translate(xMid, yMid, 0);
+	
+		geoParticles.setAttribute('customColor', new THREE.Float32BufferAttribute(colors, 3));
+		geoParticles.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+	
+		const material = new THREE.ShaderMaterial({
+			uniforms: {
+				color: { value: new THREE.Color(0xffffff) },
+				pointTexture: { value: this.particleImg }
+			},
+			vertexShader: document.getElementById('vertexshader').textContent,
+			fragmentShader: document.getElementById('fragmentshader').textContent,
+			blending: THREE.AdditiveBlending,
+			depthTest: false,
+			transparent: true,
+		});
+	
+		this.particles = new THREE.Points(geoParticles, material);
+		this.scene.add(this.particles);
+	
+		this.geometryCopy = new THREE.BufferGeometry();
+		this.geometryCopy.copy(this.particles.geometry);
+	
+		// Add event listener for the button
+		this.particles.userData = { isButton: true };
+		this.renderer.domElement.addEventListener('click', (event) => {
+			const mouse = new THREE.Vector2();
+			mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+			mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+	
+			this.raycaster.setFromCamera(mouse, this.camera);
+			const intersects = this.raycaster.intersectObject(this.particles);
+	
+			if (intersects.length > 0 && intersects[0].object.userData.isButton) {
+				// Navigate to the next page
+				window.location.href = 'next-page.html';
+			}
+		});
+	}
 
-					  
-		  for ( let  x = 0; x < shapes.length; x ++ ) {
-  
-			  let shape = shapes[ x ];
-  
-			  const amountPoints = ( shape.type == 'Path') ? this.data.amount/2 : this.data.amount;
-  
-			  let points = shape.getSpacedPoints( amountPoints ) ;
-  
-			  points.forEach( ( element, z ) => {
-						  
-				  const a = new THREE.Vector3( element.x, element.y, 0 );
-				  thePoints.push( a );
-				  colors.push( this.colorChange.r, this.colorChange.g, this.colorChange.b);
-				  sizes.push( 1 )
-  
-				  });
-		  }
-  
-		  let geoParticles = new THREE.BufferGeometry().setFromPoints( thePoints );
-		  geoParticles.translate( xMid, yMid, 0 );
-				  
-		  geoParticles.setAttribute( 'customColor', new THREE.Float32BufferAttribute( colors, 3 ) );
-		  geoParticles.setAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1) );
-  
-		  const material = new THREE.ShaderMaterial( {
-  
-			  uniforms: {
-				  color: { value: new THREE.Color( 0xffffff ) },
-				  pointTexture: { value: this.particleImg }
-			  },
-			  vertexShader: document.getElementById( 'vertexshader' ).textContent,
-			  fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
-  
-			  blending: THREE.AdditiveBlending,
-			  depthTest: false,
-			  transparent: true,
-		  } );
-  
-		  this.particles = new THREE.Points( geoParticles, material );
-		  this.scene.add( this.particles );
-  
-		  this.geometryCopy = new THREE.BufferGeometry();
-		  this.geometryCopy.copy( this.particles.geometry );
-		  
-	  }
+//end of new
   
 	  visibleHeightAtZDepth ( depth, camera ) {
   
