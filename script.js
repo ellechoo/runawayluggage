@@ -290,32 +290,32 @@ const preload = () => {
 		});
 	
 		geometry.computeBoundingBox();
-		geometry.computeVertexNormals(); // Helps with shading and distribution
+		geometry.computeVertexNormals(); // Helps with shading
 	
-		let mesh = new THREE.Mesh(geometry);
-		let vertices = [];
+		// Convert TextGeometry to BufferGeometry to access vertex data
+		let bufferGeometry = new THREE.BufferGeometry().fromGeometry(geometry);
+		let positionAttribute = bufferGeometry.attributes.position;
+		
+		if (!positionAttribute) {
+			console.error("Position attribute is undefined. Geometry may not be generated correctly.");
+			return;
+		}
 	
-		let numParticles = 10000; // Adjust for density
+		let numVertices = positionAttribute.count;
+		let numParticles = Math.min(10000, numVertices); // Adjust for density
+		let thePoints = [];
 	
-		// Generate random points inside the bounding box of the text
 		for (let i = 0; i < numParticles; i++) {
-			let x = THREE.MathUtils.lerp(geometry.boundingBox.min.x, geometry.boundingBox.max.x, Math.random());
-			let y = THREE.MathUtils.lerp(geometry.boundingBox.min.y, geometry.boundingBox.max.y, Math.random());
-			let z = THREE.MathUtils.lerp(geometry.boundingBox.min.z, geometry.boundingBox.max.z, Math.random());
+			let index = Math.floor(Math.random() * numVertices); // Random vertex index
+			let x = positionAttribute.getX(index);
+			let y = positionAttribute.getY(index);
+			let z = positionAttribute.getZ(index);
 	
-			// Raycast check to ensure points are inside the text volume
-			let raycaster = new THREE.Raycaster();
-			let dir = new THREE.Vector3(0, 0, -1); // Direction of the ray
-			raycaster.set(new THREE.Vector3(x, y, geometry.boundingBox.max.z + 1), dir);
-			let intersects = raycaster.intersectObject(mesh);
-	
-			if (intersects.length % 2 === 1) { // Odd intersections = inside geometry
-				vertices.push(x, y, z);
-			}
+			thePoints.push(x, y, z);
 		}
 	
 		let geoParticles = new THREE.BufferGeometry();
-		geoParticles.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+		geoParticles.setAttribute('position', new THREE.Float32BufferAttribute(thePoints, 3));
 	
 		const material = new THREE.ShaderMaterial({
 			uniforms: {
