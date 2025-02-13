@@ -281,6 +281,8 @@ const preload = () => {
 	  createText(){ 
   
 		  let thePoints = [];
+		  let colors = [];
+		  let sizes = [];
   
 		  let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
 		  let geometry = new THREE.ShapeGeometry( shapes );
@@ -308,9 +310,13 @@ const preload = () => {
   
 		  }
 		  shapes.push.apply( shapes, holeShapes );
+
+
+			// Define the new color for the bottom layer
+			const newColor = new THREE.Color(0xff0000);
+
   
-		  let colors = [];
-		  let sizes = [];
+		  
 					  
 		  for ( let  x = 0; x < shapes.length; x ++ ) {
   
@@ -339,7 +345,7 @@ const preload = () => {
 		  const material = new THREE.ShaderMaterial( {
   
 			  uniforms: {
-				  color: { value: new THREE.Color( 0xffffff ) },
+				  color: { value: new THREE.Color( 0xffffff ) }, //TOP LAYER COLOR
 				  pointTexture: { value: this.particleImg }
 			  },
 			  vertexShader: document.getElementById( 'vertexshader' ).textContent,
