@@ -97,11 +97,11 @@ const preload = () => {
         
         this.data = {
     
-			text: 'I rip the zipper off my bag and hide it\nSo Ill never have to know what lives inside it\nEven though Im the one who packed it.\nI dont wanna face my decisions\nEven though Im the one who did this\nI dont wanna open up cause Ive been avoiding everything\nTo stop the dizziness that I lug around\nTugging at my mouth\nSaying words I dont wanna let out\nKeep it like oil and water\nTaking a break from the friend and daughter.',
+			text: 'I rip the zipper off my bag and hide it\nSo Ill never have to know what lives inside it\nEven though Im the one who packed it.\nI dont wanna face my decisions\nEven though Im the one who did this\nI dont wanna open up\ncause Ive been avoiding everything\nTo stop the dizziness that I lug around\nTugging at my mouth\nSaying words I dont wanna let out\nKeep it like oil and water\nTaking a break from the friend and daughter.',
             amount: 1100,
             particleSize: 0.8,
             particleColor: 0xffffff,
-            textSize: 8,
+            textSize: 7,
             area: 190,
             ease: .05,
         }
