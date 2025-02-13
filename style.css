@@ -35,14 +35,6 @@ html, body {
   margin-bottom: 50px;
 }
 
-h1 {
-  font-size: 50px;
-  color: black; 
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
-
 
 
 
@@ -230,21 +222,4 @@ a {
 section {
   position: relative;
   z-index: 1;
-}
-
-
-.letter-button-end {
-  font-family: 'Roboto', sans-serif;
-  font-size: 50px; 
-  width: auto;
-  height: auto;
-  color: rgb(0, 0, 0); 
-  border: none; 
-  background: none;
-  padding: 0; 
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
 }
