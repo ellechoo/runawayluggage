@@ -4,14 +4,14 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: auto; /* Allows scrolling */
+  overflow: auto;
   font-family: 'Roboto', sans-serif !important; 
   color: white;
   font-size: 9px;
 }
 
 #magic {
-  position: fixed; /* Keeps it in place */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -20,10 +20,10 @@ html, body {
 }
 
 .playground {
-  position: relative; /* Allows content to flow normally */
+  position: relative;
   width: 100%;
   height: auto;
-  min-height: 200vh; /* Makes sure there's enough content to scroll */
+  min-height: 200vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

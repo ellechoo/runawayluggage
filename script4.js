@@ -97,10 +97,11 @@ const preload = () => {
         
         this.data = {
     
-			text: 'Today I dont wanna go there\nToo much to carry on my shoulder\nDont say that its part of getting older\nToday, I dont wanna go\nI dont wanna go there\n I dont wanna go, no\nI dont wanna go there.\nWent too fast, but theres no way to slow down\nJumped too high now I cant look at the ground\nIts too loud but no ones making a sound\nIm too tired, dont feel figuring it out.\nToday I dont wanna go there\nToo much to carry on my shoulder\n Dont say that its part of getting older\nToday, I dont wanna go\nI dont wanna go there\n I dont wanna go, no\nI dont wanna go there.',
-            particleSize: 0.6,
+			text: 'Baby, today I dont wanna go there\nIts way too much to carry on my shoulders\nDont say to me its part of getting older\n Baby, I dont wanna go.',
+            amount: 1500,
+            particleSize: 0.4,
             particleColor: 0xffffff,
-            textSize: 8,
+            textSize: 6,
             area: 250,
             ease: .05,
         }
