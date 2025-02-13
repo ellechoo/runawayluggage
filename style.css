@@ -53,10 +53,16 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 50px;
+  color: black; 
+  justify-content: center;
+}
 
 .letter-button {
   font-family: 'Roboto', sans-serif; /* Use 'Roboto' as per your import */
-  font-size: 48px; 
+  font-size: 50px; 
   width: auto; /* Let the width adjust to the content (the letter) */
   height: auto; /* Let the height adjust to the content (the letter) */
   color: white; 
