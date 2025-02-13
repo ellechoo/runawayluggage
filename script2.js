@@ -99,7 +99,7 @@ const preload = () => {
     
 			text: 'I rip the zipper off my bag and hide it\nSo Ill never have to know what lives inside it\nEven though Im the one who packed it.\nI dont wanna face my decisions\nEven though Im the one who did this\nI dont wanna open up cause Ive been avoiding everything\nTo stop the dizziness that I lug around\nTugging at my mouth\nSaying words I dont wanna let out\nKeep it like oil and water\nTaking a break from the friend and daughter.',
             amount: 1500,
-            particleSize: 0.8,
+            particleSize: 2,
             particleColor: 0xffffff,
             textSize: 8,
             area: 250,
