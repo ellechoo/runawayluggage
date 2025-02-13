@@ -78,7 +78,7 @@ const preload = () => {
 	}
   }
 
-  
+
   
   class CreateParticles {
   
@@ -101,7 +101,7 @@ const preload = () => {
             amount: 1500,
             particleSize: 1,
             particleColor: 0xffffff,
-            textSize: 16,
+            textSize: 18,
             area: 250,
             ease: .05,
         }
