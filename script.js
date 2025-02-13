@@ -279,44 +279,43 @@ const preload = () => {
 	  }
   
 
-	  
+	  //new
 	  createText() {
 		let geometry = new THREE.TextGeometry(this.data.text, {
 			font: this.font,
 			size: this.data.textSize,
-			height: 1, // Prevent zero thickness
+			height: 5, // Increased thickness for a filled look
 			curveSegments: 10,
 			bevelEnabled: false
 		});
 	
 		geometry.computeBoundingBox();
-		geometry.computeVertexNormals(); // Helps with shading and particle placement
+		geometry.computeVertexNormals(); // Helps with shading and distribution
 	
-		let thePoints = [];
-		let colors = [];
-		let sizes = [];
+		let mesh = new THREE.Mesh(geometry);
+		let vertices = [];
 	
-		// Get position attribute to sample points
-		let positionAttribute = geometry.attributes.position;
-		let numVertices = positionAttribute.count;
+		let numParticles = 10000; // Adjust for density
 	
-		let numParticles = Math.min(10000, numVertices); // Prevent excessive particles
-	
+		// Generate random points inside the bounding box of the text
 		for (let i = 0; i < numParticles; i++) {
-			let index = Math.floor(Math.random() * numVertices); // Random vertex index
-			let x = positionAttribute.getX(index);
-			let y = positionAttribute.getY(index);
-			let z = positionAttribute.getZ(index);
+			let x = THREE.MathUtils.lerp(geometry.boundingBox.min.x, geometry.boundingBox.max.x, Math.random());
+			let y = THREE.MathUtils.lerp(geometry.boundingBox.min.y, geometry.boundingBox.max.y, Math.random());
+			let z = THREE.MathUtils.lerp(geometry.boundingBox.min.z, geometry.boundingBox.max.z, Math.random());
 	
-			thePoints.push(x, y, z);
-			colors.push(this.colorChange.r, this.colorChange.g, this.colorChange.b);
-			sizes.push(1);
+			// Raycast check to ensure points are inside the text volume
+			let raycaster = new THREE.Raycaster();
+			let dir = new THREE.Vector3(0, 0, -1); // Direction of the ray
+			raycaster.set(new THREE.Vector3(x, y, geometry.boundingBox.max.z + 1), dir);
+			let intersects = raycaster.intersectObject(mesh);
+	
+			if (intersects.length % 2 === 1) { // Odd intersections = inside geometry
+				vertices.push(x, y, z);
+			}
 		}
 	
 		let geoParticles = new THREE.BufferGeometry();
-		geoParticles.setAttribute('position', new THREE.Float32BufferAttribute(thePoints, 3));
-		geoParticles.setAttribute('customColor', new THREE.Float32BufferAttribute(colors, 3));
-		geoParticles.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+		geoParticles.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 	
 		const material = new THREE.ShaderMaterial({
 			uniforms: {
@@ -332,10 +331,7 @@ const preload = () => {
 	
 		this.particles = new THREE.Points(geoParticles, material);
 		this.scene.add(this.particles);
-	
-		this.geometryCopy = new THREE.BufferGeometry();
-		this.geometryCopy.copy(this.particles.geometry);
-	}
+	}	
 	
 
 	
