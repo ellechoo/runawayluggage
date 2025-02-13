@@ -108,8 +108,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 100px;
-  left: 80px;
+  top: 98px;
+  left: 100px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -122,8 +122,6 @@ a {
 .letter-button-1:not(:hover) {
   opacity: 0;
 }
-
-
 
 
 

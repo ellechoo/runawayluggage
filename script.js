@@ -39,7 +39,7 @@ const preload = () => {
   
 	setup(){ 
   
-	  this.createParticles = new CreateParticles( this.scene, this.font,             this.particle, this.camera, this.renderer );
+	  this.createParticles = new CreateParticles( this.scene, this.font,     this.particle, this.camera, this.renderer );
 	}
   
 	render() {
