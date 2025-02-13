@@ -97,7 +97,7 @@ const preload = () => {
   
 		  this.data = {
   
-			  text: 'RUNAWAY\nLUGGAGE',
+			  text: 'runaway\nluggage',
 			  amount: 1500,
 			  particleSize: 1,
 			  particleColor: 0xffffff,
@@ -130,28 +130,6 @@ const preload = () => {
 		  
 	  }
   
-	  onMouseDown(){
-		  
-		  this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-		  this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-  
-		  const vector = new THREE.Vector3( this.mouse.x, this.mouse.y, 0.5);
-		  vector.unproject( this.camera );
-		  const dir = vector.sub( this.camera.position ).normalize();
-		  const distance = - this.camera.position.z / dir.z;
-		  this.currenPosition = this.camera.position.clone().add( dir.multiplyScalar( distance ) );
-		  
-		  const pos = this.particles.geometry.attributes.position;
-		  this.buttom = true;
-		  this.data.ease = .01;
-		  
-	  }
-  
-	  onMouseUp(){
-  
-		  this.buttom = false;
-		  this.data.ease = .05;
-	  }
   
 	  onMouseMove( ) { 
   
