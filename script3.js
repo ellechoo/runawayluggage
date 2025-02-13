@@ -97,7 +97,7 @@ const preload = () => {
         
         this.data = {
     
-			text: 'Today I dont wanna go there. Too much to carry on my shoulder.\nDont say that its part of getting older. Today, I dont wanna go\nI dont wanna go there. I dont wanna go, no. I dont wanna go there.\nWent too fast, but theres no way to slow down.\nJumped too high now I cant look at the ground.\nIts too loud but no ones making a sound\nIm too tired, dont feel figuring it out.\nToday I dont wanna go there. Too much to carry on my shoulder.\nDont say that its part of getting older. Today, I dont wanna go.\nI dont wanna go there. I dont wanna go, no. I dont wanna go there.',
+			text: 'Keep it like oil and water.\nTaking a break from the friend and daughter.\nToday I dont wanna go there. Too much to carry on my shoulder.\nDont say that its part of getting older. Today, I dont wanna go\nI dont wanna go there. I dont wanna go, no. I dont wanna go there.\nWent too fast, but theres no way to slow down.\nJumped too high now I cant look at the ground.\nIts too loud but no ones making a sound\nIm too tired, dont feel figuring it out.\nToday I dont wanna go there. Too much to carry on my shoulder.\nDont say that its part of getting older. Today, I dont wanna go.\nI dont wanna go there. I dont wanna go, no. I dont wanna go there.',
             amount: 800,
             particleSize: 0.6,
             particleColor: 0xffffff,
