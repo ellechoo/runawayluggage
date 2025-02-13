@@ -313,7 +313,7 @@ const preload = () => {
 
 
 			// Define the new color for the bottom layer
-			const newColor = new THREE.Color(0xff0000);
+			const fixedColor = new THREE.Color(0x00ff00);
 
   
 		  
