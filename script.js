@@ -91,7 +91,7 @@ const preload = () => {
 		  this.raycaster = new THREE.Raycaster();
 		  this.mouse = new THREE.Vector2(-200, 200);
 		  
-		  this.colorChange = new THREE.Color();
+	
   
 		  this.buttom = false;
   
@@ -190,9 +190,7 @@ const preload = () => {
 				  let py = pos.getY(i);
 				  let pz = pos.getZ(i);
   
-				  this.colorChange.setHSL( .5, 1 , 1 )
-				  coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-				  coulors.needsUpdate = true;
+	
   
 				  size.array[ i ]  = this.data.particleSize;
 				  size.needsUpdate = true;
@@ -211,15 +209,11 @@ const preload = () => {
 					  px -= f * Math.cos( t );
 					  py -= f * Math.sin( t );
   
-					  this.colorChange.setHSL( .5 + zigzagTime, 1.0 , .5 )
-					  coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-					  coulors.needsUpdate = true;
+					  
   
 					  if ((px > (initX + 70)) || ( px < (initX - 70)) || (py > (initY + 70) || ( py < (initY - 70)))){
   
-						  this.colorChange.setHSL( .15, 1.0 , .5 )
-						  coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-						  coulors.needsUpdate = true;
+						  
   
 					  }
   
@@ -233,9 +227,7 @@ const preload = () => {
 							  px -= .03 * Math.cos( t );
 							  py -= .03 * Math.sin( t );
   
-							  this.colorChange.setHSL( .15 , 1.0 , .5 )
-							  coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-							  coulors.needsUpdate = true;
+							  
   
 							  size.array[ i ]  =  this.data.particleSize /1.2;
 							  size.needsUpdate = true;
@@ -255,9 +247,7 @@ const preload = () => {
   
 						  if ((px > (initX + 10)) || ( px < (initX - 10)) || (py > (initY + 10) || ( py < (initY - 10)))){
   
-							  this.colorChange.setHSL( .15, 1.0 , .5 )
-							  coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
-							  coulors.needsUpdate = true;
+							  
   
 							  size.array[ i ]  = this.data.particleSize /1.8;
 							  size.needsUpdate = true;
