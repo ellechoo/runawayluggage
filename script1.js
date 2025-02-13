@@ -107,6 +107,7 @@ const preload = () => {
 		  }
   
 		  this.setup();
+		  this.bindEvents();
   
 	  }
   
@@ -121,9 +122,36 @@ const preload = () => {
   
 	  }
   
-	  
+	  bindEvents() {
   
-	  
+		  document.addEventListener( 'mousedown', this.onMouseDown.bind( this ));
+		  document.addEventListener( 'mousemove', this.onMouseMove.bind( this ));
+		  document.addEventListener( 'mouseup', this.onMouseUp.bind( this ));
+		  
+	  }
+  
+	  onMouseDown(){
+		  
+		  this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+		  this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+  
+		  const vector = new THREE.Vector3( this.mouse.x, this.mouse.y, 0.5);
+		  vector.unproject( this.camera );
+		  const dir = vector.sub( this.camera.position ).normalize();
+		  const distance = - this.camera.position.z / dir.z;
+		  this.currenPosition = this.camera.position.clone().add( dir.multiplyScalar( distance ) );
+		  
+		  const pos = this.particles.geometry.attributes.position;
+		  this.buttom = true;
+		  this.data.ease = .01;
+		  
+	  }
+  
+	  onMouseUp(){
+  
+		  this.buttom = false;
+		  this.data.ease = .05;
+	  }
   
 	  onMouseMove( ) { 
   
