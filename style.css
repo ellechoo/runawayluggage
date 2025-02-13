@@ -52,14 +52,15 @@ a {
 
 
 .letter-button {
-  font-family: 'YourFont', sans-serif; 
+  font-family: 'Roboto', sans-serif; /* Use 'Roboto' as per your import */
   font-size: 48px; 
-  width: 80px; 
-  height: 80px;
+  width: auto; /* Let the width adjust to the content (the letter) */
+  height: auto; /* Let the height adjust to the content (the letter) */
   color: white; 
   border: none; 
-  border-radius: 50%; 
-  display: flex;
+  background: none; /* No background */
+  padding: 0; /* Remove any extra padding */
+  display: inline-flex; /* Aligns the content horizontally */
   align-items: center;
   justify-content: center;
   text-align: center;
