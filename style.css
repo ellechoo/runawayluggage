@@ -73,7 +73,11 @@ a {
   text-align: center;
   cursor: pointer;
   z-index: 2;
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
 }
+
 
 section {
   position: relative;
