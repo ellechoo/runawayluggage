@@ -107,7 +107,6 @@ const preload = () => {
 		  }
   
 		  this.setup();
-		  this.bindEvents();
   
 	  }
   
