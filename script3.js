@@ -102,7 +102,7 @@ const preload = () => {
             particleSize: 0.6,
             particleColor: 0xffffff,
             textSize: 8,
-            area: 190,
+            area: 130,
             ease: .05,
         }
     
