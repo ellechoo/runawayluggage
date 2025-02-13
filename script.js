@@ -122,11 +122,7 @@ const preload = () => {
   
 	  }
   
-	  bindEvents() {
-  
-		  document.addEventListener( 'mouseup', this.onMouseUp.bind( this ));
-		  
-	  }
+	  
   
 	  
   
