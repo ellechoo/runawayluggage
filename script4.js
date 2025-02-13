@@ -98,7 +98,7 @@ const preload = () => {
         this.data = {
     
 			text: 'Baby, today I dont wanna go there\nIts way too much to carry on my shoulders\nDont say to me its part of getting older\n Baby, I dont wanna go.',
-            amount: 400,
+            amount: 300,
             particleSize: 0.4,
             particleColor: 0xffffff,
             textSize: 6,
