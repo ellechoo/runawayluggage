@@ -268,91 +268,82 @@ const preload = () => {
 		  }
 	  }
   
-	  createText(){ 
-  
-		  let thePoints = [];
-		  let colors = [];
-		  let sizes = [];
-  
-		  let shapes = this.font.generateShapes( this.data.text , this.data.textSize  );
-		  let geometry = new THREE.ShapeGeometry( shapes );
-		  geometry.computeBoundingBox();
+
+
 	  
-		  const xMid = - 0.5 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-		  const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
-  
-		  geometry.center();
-  
-		  let holeShapes = [];
-  
-		  for ( let q = 0; q < shapes.length; q ++ ) {
-  
-			  let shape = shapes[ q ];
-  
-			  if ( shape.holes && shape.holes.length > 0 ) {
-  
-				  for ( let  j = 0; j < shape.holes.length; j ++ ) {
-  
-					  let  hole = shape.holes[ j ];
-					  holeShapes.push( hole );
-				  }
-			  }
-  
+	  createText() {
+		let thePoints = [];
+		let colors = [];
+		let sizes = [];
+	  
+		let shapes = this.font.generateShapes(this.data.text, this.data.textSize);
+		let geometry = new THREE.ShapeGeometry(shapes);
+		geometry.computeBoundingBox();
+	  
+		const xMid = -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+		const yMid = (geometry.boundingBox.max.y - geometry.boundingBox.min.y) / 2.85;
+	  
+		geometry.center();
+	  
+		let holeShapes = [];
+	  
+		for (let q = 0; q < shapes.length; q++) {
+		  let shape = shapes[q];
+	  
+		  if (shape.holes && shape.holes.length > 0) {
+			for (let j = 0; j < shape.holes.length; j++) {
+			  let hole = shape.holes[j];
+			  holeShapes.push(hole);
+			}
 		  }
-		  shapes.push.apply( shapes, holeShapes );
-
-
-			// Define the new color for the bottom layer
-			const fixedColor = new THREE.Color(0x00ff00);
-
-  
-		  
-					  
-		  for ( let  x = 0; x < shapes.length; x ++ ) {
-  
-			  let shape = shapes[ x ];
-  
-			  const amountPoints = ( shape.type == 'Path') ? this.data.amount/2 : this.data.amount;
-  
-			  let points = shape.getSpacedPoints( amountPoints ) ;
-  
-			  points.forEach( ( element, z ) => {
-						  
-				  const a = new THREE.Vector3( element.x, element.y, 0 );
-				  thePoints.push( a );
-				  colors.push(fixedColor.r, fixedColor.g, fixedColor.b);
-				  sizes.push( 1 )
-  
-				  });
-		  }
-  
-		  let geoParticles = new THREE.BufferGeometry().setFromPoints( thePoints );
-		  geoParticles.translate( xMid, yMid, 0 );
-				  
-		  geoParticles.setAttribute( 'customColor', new THREE.Float32BufferAttribute( colors, 3 ) );
-		  geoParticles.setAttribute( 'size', new THREE.Float32BufferAttribute( sizes, 1) );
-  
-		  const material = new THREE.ShaderMaterial( {
-  
-			  uniforms: {
-				  color: { value: new THREE.Color( 0xffffff ) }, //TOP LAYER COLOR
-				  pointTexture: { value: this.particleImg }
-			  },
-			  vertexShader: document.getElementById( 'vertexshader' ).textContent,
-			  fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
-  
-			  blending: THREE.AdditiveBlending,
-			  depthTest: false,
-			  transparent: true,
-		  } );
-  
-		  this.particles = new THREE.Points( geoParticles, material );
-		  this.scene.add( this.particles );
-  
-		  this.geometryCopy = new THREE.BufferGeometry();
-		  this.geometryCopy.copy( this.particles.geometry );
-		  
+		}
+		shapes.push.apply(shapes, holeShapes);
+	  
+		// Define the new color for the bottom layer
+		const fixedColor = new THREE.Color(0x000000); // Bottom layer is black
+	  
+		for (let x = 0; x < shapes.length; x++) {
+		  let shape = shapes[x];
+	  
+		  const amountPoints = (shape.type == 'Path') ? this.data.amount / 2 : this.data.amount;
+	  
+		  let points = shape.getSpacedPoints(amountPoints);
+	  
+		  points.forEach((element, z) => {
+			const a = new THREE.Vector3(element.x, element.y, 0);
+			thePoints.push(a);
+			colors.push(fixedColor.r, fixedColor.g, fixedColor.b); // Bottom layer uses fixedColor (black)
+			sizes.push(1);
+		  });
+		}
+	  
+		let geoParticles = new THREE.BufferGeometry().setFromPoints(thePoints);
+		geoParticles.translate(xMid, yMid, 0);
+	  
+		geoParticles.setAttribute('customColor', new THREE.Float32BufferAttribute(colors, 3));
+		geoParticles.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+	  
+		const material = new THREE.ShaderMaterial({
+		  uniforms: {
+			color: { value: new THREE.Color(0xffffff) }, // Top layer is white
+			pointTexture: { value: this.particleImg }
+		  },
+		  vertexShader: document.getElementById('vertexshader').textContent,
+		  fragmentShader: document.getElementById('fragmentshader').textContent,
+		  blending: THREE.AdditiveBlending,
+		  depthTest: false,
+		  transparent: true,
+		});
+	  
+		this.particles = new THREE.Points(geoParticles, material);
+		this.scene.add(this.particles);
+	  
+		this.geometryCopy = new THREE.BufferGeometry();
+		this.geometryCopy.copy(this.particles.geometry);
 	  }
+
+
+
   
 	  visibleHeightAtZDepth ( depth, camera ) {
   
