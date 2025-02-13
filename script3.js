@@ -186,7 +186,7 @@ const preload = () => {
                         px -= .03 * Math.cos( t );
                         py -= .03 * Math.sin( t );
     
-                        this.colorChange.setHSL( .15 , 1.0 , .5 )
+                        this.colorChange.setHSL( 0.66 , 1.0 , 0.3 )
                         coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
                         coulors.needsUpdate = true;
     
