@@ -270,7 +270,7 @@ const preload = () => {
   
 
 
-	  
+
 	  createText() {
 		let thePoints = [];
 		let colors = [];
