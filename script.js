@@ -330,7 +330,7 @@ const preload = () => {
 						  
 				  const a = new THREE.Vector3( element.x, element.y, 0 );
 				  thePoints.push( a );
-				  colors.push( this.colorChange.r, this.colorChange.g, this.colorChange.b);
+				  colors.push(fixedColor.r, fixedColor.g, fixedColor.b);
 				  sizes.push( 1 )
   
 				  });
