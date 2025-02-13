@@ -74,15 +74,28 @@ h1 {
   justify-content: center;
   text-align: center;
   cursor: pointer;
+  z-index: 2;
 }
-
 
 section {
   position: relative;
   z-index: 1;
 }
 
-.letter-button {
-  position: relative;
-  z-index: 2;
+
+.letter-button-2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 50px; 
+  width: auto;
+  height: auto;
+  color: rgb(0, 0, 0); 
+  border: none; 
+  background: none; /* No background */
+  padding: 0; /* Remove any extra padding */
+  display: inline-flex; /* Aligns the content horizontally */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
 }
+
