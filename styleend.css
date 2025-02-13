@@ -1,5 +1,8 @@
 body {
   background-color: rgb(0, 19, 112);
+  font-family: sans-serif; /* Default fallback font */
+  margin: 0;
+  padding: 0;
 }
 
 @font-face {
@@ -9,33 +12,37 @@ body {
   font-style: normal;
 }
 
+h1 {
+  font-family: 'Jackgo', sans-serif;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin: 10px 0;
+}
+
 .letter-button-end {
   font-family: 'Roboto', sans-serif;
-    font-size: 200px; 
-    width: auto;
-    height: auto;
-    color: rgb(255, 255, 255); 
-    border: none; 
-    background: none;
-    padding: 0; 
-    display: inline-flex; 
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-  }
+  font-size: 200px;
+  color: white;
+  border: none;
+  background: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
 
-
-  h1 {
-    font-family: 'Jackgo', sans-serif;
-    font-size: 50px;
-    color: rgb(255, 255, 255); 
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-
-  p {font-size: 20px;
-    color: white;
-    text-align:center;
-  }
+.letter-button-end:hover {
+  transform: scale(1.05);
+}
