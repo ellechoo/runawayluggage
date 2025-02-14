@@ -94,7 +94,7 @@ a {
   font-size: 40px; 
   width: auto; 
   height: auto; 
-  color: white; 
+  color: rgb(125, 125, 125); 
   border: none; 
   background: none;
   padding: 0; 
@@ -128,7 +128,7 @@ a {
   font-size: 30px; 
   width: auto; 
   height: auto; 
-  color: white; 
+  color: rgb(125, 125, 125);  
   border: none; 
   background: none;
   padding: 0; 
@@ -163,7 +163,7 @@ a {
   font-size: 20px; 
   width: auto; 
   height: auto; 
-  color: white; 
+  color: rgb(125, 125, 125); 
   border: none; 
   background: none;
   padding: 0; 
@@ -197,7 +197,7 @@ a {
   font-size: 10px; 
   width: auto; 
   height: auto; 
-  color: white; 
+  color: rgb(125, 125, 125); 
   border: none; 
   background: none;
   padding: 0; 
