@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap');
 
 html, body { 
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: auto;
-  font-family: 'Roboto', sans-serif !important; 
+  font-family: 'Manrope', serif !important; 
   color: white;
   font-size: 9px;
 }
@@ -51,7 +51,7 @@ a {
 
 
 .letter-button-home {
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Jackgo', sans-serif; 
   font-size: 200px; 
   width: auto; 
   height: auto; 
@@ -85,7 +85,7 @@ a {
 
 
 .letter-button-1 {
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Manrope', serif; 
   font-size: 60px; 
   width: auto; 
   height: auto; 
@@ -119,7 +119,7 @@ a {
 
 
 .letter-button-2 {
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Manrope', serif; 
   font-size: 60px; 
   width: auto; 
   height: auto; 
@@ -154,7 +154,7 @@ a {
 
 
 .letter-button-3 {
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Manrope', serif; 
   font-size: 60px; 
   width: auto; 
   height: auto; 
@@ -188,7 +188,7 @@ a {
 
 
 .letter-button-4 {
-  font-family: 'Roboto', sans-serif; 
+  font-family: 'Manrope', serif; 
   font-size: 60px; 
   width: auto; 
   height: auto; 
