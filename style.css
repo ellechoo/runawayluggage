@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap');
 
+@font-face {
+  font-family: 'Jackgo';
+  src: url('fonts/Jackgo-8OOaA.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html, body { 
   margin: 0;
   padding: 0;
@@ -34,8 +41,6 @@ html, body {
   text-align: center;
   margin-bottom: 50px;
 }
-
-
 
 
 .minText{
@@ -86,7 +91,7 @@ a {
 
 .letter-button-1 {
   font-family: 'Manrope', serif; 
-  font-size: 60px; 
+  font-size: 40px; 
   width: auto; 
   height: auto; 
   color: white; 
@@ -100,8 +105,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 98px;
-  left: 100px;
+  top: 120px;
+  left: 120px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -120,7 +125,7 @@ a {
 
 .letter-button-2 {
   font-family: 'Manrope', serif; 
-  font-size: 60px; 
+  font-size: 30px; 
   width: auto; 
   height: auto; 
   color: white; 
@@ -134,8 +139,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 90px;
-  right: 70px;
+  top: 110px;
+  right: 110px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -155,7 +160,7 @@ a {
 
 .letter-button-3 {
   font-family: 'Manrope', serif; 
-  font-size: 60px; 
+  font-size: 20px; 
   width: auto; 
   height: auto; 
   color: white; 
@@ -189,7 +194,7 @@ a {
 
 .letter-button-4 {
   font-family: 'Manrope', serif; 
-  font-size: 60px; 
+  font-size: 10px; 
   width: auto; 
   height: auto; 
   color: white; 
@@ -203,8 +208,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  bottom: 180px;
-  right: 180px;
+  bottom: 250px;
+  right: 250px;
 
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
