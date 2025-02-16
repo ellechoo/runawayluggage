@@ -42,13 +42,16 @@ const preload = () => {
 	  this.createParticles = new CreateParticles( this.scene, this.font,     this.particle, this.camera, this.renderer );
 	}
   
-	render() {
-	  
-	   this.createParticles.render()
-	   this.renderer.render( this.scene, this.camera )
+	
+    
+    render() {
+        console.log(this.particles.geometry.attributes.position.array); // Debugging
+        this.createParticles.render();
+        this.renderer.render(this.scene, this.camera);
+        this.updateButtonPosition();
+    }
+    
 
-       this.updateButtonPosition(); // button follows the particles
-	}
   
 	createCamera() {
   
@@ -71,15 +74,18 @@ const preload = () => {
   
 	}
   
-	onWindowResize(){
-  
-	  this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
-	  this.camera.updateProjectionMatrix();
-	  this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
 
-      this.createParticles.updateButtonPosition(); //button resizing
-  
-	}
+    onWindowResize(){
+        this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
+    
+        this.createParticles.updateButtonPosition(); // button resizing
+        this.createParticles.render(); // Ensure particles update after resizing
+        this.render(); // Force re-render
+    }
+    
+
   }
 
 
