@@ -66,19 +66,16 @@ text {
   font-size: 8px;
   fill: transparent;
   stroke: #fff;
-  stroke-width: 0.3;
   font-family: arial, cursive;
   font-weight: bold;
 }
 
 #text-1 {
   font-family: 'Manrope', serif;
-  fill: #fff;
-  stroke: none;
+  color: #fff;
 }
 
 #text-2 {
   font-family: 'Jackgo', sans-serif;
-  fill: #fff;
-  stroke: none;
+  color: #fff;
 }
