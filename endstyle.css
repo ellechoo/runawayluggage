@@ -64,6 +64,7 @@ path {
 }
 
 text {
+  font-family: 'Jackgo', sans-serif;
   font-size: 8px;
   fill: transparent;
   stroke: #fff;
@@ -73,6 +74,7 @@ text {
 }
 
 #text-1 {
+  font-family: 'Jackgo', sans-serif;
   fill: #fff;
   stroke: none;
 }
