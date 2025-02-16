@@ -202,8 +202,6 @@ a {
 .letter-button-4 {
   font-family: 'Manrope', serif; 
   font-size: 45px; 
-  width: auto; 
-  height: auto; 
   color: rgb(255, 255, 255); 
   border: none; 
   background: none;
@@ -215,8 +213,9 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 500px;
-  right: 400px;
+  top: 50%; /* Centers vertically */
+  right: 10%; /* Makes it positioned from the right, but not fully at the edge */
+  transform: translateY(-50%); /* Ensures it's vertically centered */
 
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
@@ -229,6 +228,7 @@ a {
 .letter-button-4:not(:hover) {
   opacity: 1;
 }
+
 
 
 section {
