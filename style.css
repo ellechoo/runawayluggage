@@ -98,7 +98,7 @@ a {
 
 .letter-button-1 {
   font-family: 'Manrope', serif; 
-  font-size: 40px; 
+  font-size: 50px; 
   width: auto; 
   height: auto; 
   color: rgb(255, 255, 255); 
@@ -132,7 +132,7 @@ a {
 
 .letter-button-2 {
   font-family: 'Manrope', serif; 
-  font-size: 35px; 
+  font-size: 40px; 
   width: auto; 
   height: auto; 
   color: rgb(255, 255, 255);  
@@ -146,8 +146,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 610px;
-  right: 610px;
+  bottom: 250px;
+  left: 350px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -215,8 +215,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  bottom: 650px;
-  right: 650px;
+  bottom: 550px;
+  right: 550px;
 
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
