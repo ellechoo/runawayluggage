@@ -46,6 +46,8 @@ const preload = () => {
 	  
 	   this.createParticles.render()
 	   this.renderer.render( this.scene, this.camera )
+
+       this.updateButtonPosition(); // button follows the particles
 	}
   
 	createCamera() {
@@ -74,6 +76,8 @@ const preload = () => {
 	  this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
 	  this.camera.updateProjectionMatrix();
 	  this.renderer.setSize( this.container.clientWidth, this.container.clientHeight );
+
+      this.createParticles.updateButtonPosition(); //button resizing
   
 	}
   }
@@ -331,4 +335,41 @@ const preload = () => {
      
         return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
     }
+
+
+
+
+
+    
+    //button resizing shit
+
+    updateButtonPosition() {
+        const boundingBox = new THREE.Box3().setFromObject(this.particles);
+        const center = boundingBox.getCenter(new THREE.Vector3());
+    
+        const screenPosition = this.toScreenPosition(center);
+        
+        const button = document.getElementById('dynamic-button');
+        if (button) {
+            button.style.left = `${screenPosition.x}px`;
+            button.style.top = `${screenPosition.y}px`;
+    
+            // Adjust button size based on text size
+            button.style.fontSize = `${this.data.textSize * 2}px`;
+        }
+    }
+    
+    toScreenPosition(position) {
+        const vector = position.clone().project(this.camera);
+        return {
+            x: (vector.x + 1) * window.innerWidth / 2,
+            y: (-vector.y + 1) * window.innerHeight / 2
+        };
+    }
+
 }
+
+
+
+
+
