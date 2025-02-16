@@ -76,8 +76,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  bottom: 251px;
-  right: 440px;
+  bottom: 253px;
+  right: 428px;
 
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
