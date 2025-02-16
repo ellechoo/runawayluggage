@@ -163,7 +163,7 @@ const preload = () => {
                 let py = pos.getY(i);
                 let pz = pos.getZ(i);
     
-                this.colorChange.setHSL( .5, 1 , 1 )
+                this.colorChange.setHSL( 0.55 , 0.6 , 0.6 );
                 coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
                 coulors.needsUpdate = true;
     
@@ -208,7 +208,7 @@ const preload = () => {
     
                     if ((px > (initX + 10)) || ( px < (initX - 10)) || (py > (initY + 10) || ( py < (initY - 10)))){
     
-                        this.colorChange.setHSL( 0.66 , 1.0 , 0.7 )
+                        this.colorChange.setHSL( 0.5 , 1.0 , 1.0 )
                         coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
                         coulors.needsUpdate = true;
     
