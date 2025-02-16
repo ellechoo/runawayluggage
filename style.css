@@ -149,7 +149,7 @@ a {
   bottom: 300px;
   right: 350px;
   
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -158,7 +158,7 @@ a {
 }
 
 .letter-button-2:not(:hover) {
-  opacity: 0;
+  opacity: 1;
 }
 
 
