@@ -146,8 +146,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  bottom: 300px;
-  right: 350px;
+  bottom: 250px;
+  left: 300px;
   
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
@@ -184,7 +184,7 @@ a {
   bottom: 350px;
   left: 350px;
   
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -193,7 +193,7 @@ a {
 }
 
 .letter-button-3:not(:hover) {
-  opacity: 0;
+  opacity: 1;
 }
 
 
@@ -218,7 +218,7 @@ a {
   top: 500px;
   right: 400px;
 
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -227,7 +227,7 @@ a {
 }
 
 .letter-button-4:not(:hover) {
-  opacity: 0;
+  opacity: 1;
 }
 
 
