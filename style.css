@@ -59,7 +59,7 @@ a {
 
 
 
-
+/*DONT TOUCH*/
 .letter-button-home {
   font-family: 'Jackgo', sans-serif; 
   font-size: 180px; 
@@ -94,12 +94,14 @@ a {
 
 
 
+
+
 .letter-button-1 {
   font-family: 'Manrope', serif; 
   font-size: 40px; 
   width: auto; 
   height: auto; 
-  color: rgb(125, 125, 125); 
+  color: rgb(255, 255, 255); 
   border: none; 
   background: none;
   padding: 0; 
@@ -110,8 +112,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 120px;
-  left: 120px;
+  top: 320px;
+  left: 320px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -133,7 +135,7 @@ a {
   font-size: 35px; 
   width: auto; 
   height: auto; 
-  color: rgb(125, 125, 125);  
+  color: rgb(255, 255, 255);  
   border: none; 
   background: none;
   padding: 0; 
@@ -144,8 +146,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 110px;
-  right: 110px;
+  top: 610px;
+  right: 610px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -168,7 +170,7 @@ a {
   font-size: 30px; 
   width: auto; 
   height: auto; 
-  color: rgb(125, 125, 125); 
+  color: rgb(255, 255, 255); 
   border: none; 
   background: none;
   padding: 0; 
@@ -179,8 +181,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  bottom: 50px;
-  right: 90px;
+  bottom: 150px;
+  left: 150px;
   
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -202,7 +204,7 @@ a {
   font-size: 25px; 
   width: auto; 
   height: auto; 
-  color: rgb(125, 125, 125); 
+  color: rgb(255, 255, 255); 
   border: none; 
   background: none;
   padding: 0; 
@@ -213,8 +215,8 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  bottom: 250px;
-  right: 250px;
+  bottom: 650px;
+  right: 650px;
 
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
