@@ -204,9 +204,9 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(0, 0, 0);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease-out;
-  z-index: 9999;
+  background-color: rgb(0, 0, 0); /* Black background */
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Prevents interaction while fading */
+  transition: opacity 1s ease-out; /* Smooth transition */
+  z-index: 9999; /* Ensures it's on top */
 }
