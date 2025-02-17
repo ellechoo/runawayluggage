@@ -238,7 +238,7 @@ const preload = () => {
         geometry.computeBoundingBox();
     
         const xMid = - 0.6 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-        const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.0;
+        const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.3;
     
         geometry.center();
     
