@@ -58,7 +58,40 @@ a {
 
 
 /* CHANGES */
-.letter-button-home, .letter-button-1, .letter-button-2, .letter-button-3, .letter-button-4 {
+
+.letter-button-home {
+  font-family: 'Jackgo', sans-serif; 
+  font-size: 180px; 
+  width: auto; 
+  height: auto; 
+  color: white; 
+  border: none; 
+  background: none;
+  padding: 0; 
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  z-index: 2;
+  position: fixed;
+  bottom: 253px;
+  right: 428px;
+
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.letter-button-home:hover {
+  opacity: 1;
+}
+
+.letter-button-home:not(:hover) {
+  opacity: 0;
+}
+
+
+.letter-button-1, .letter-button-2, .letter-button-3 {
   font-family: 'Manrope', serif;
   color: rgb(255, 255, 255);
   border: none;
@@ -73,18 +106,56 @@ a {
   transition: opacity 0.5s ease-in-out, transform 0.2s ease;
 }
 
+
 .letter-button-4 {
-  font-family: 'Manrope', serif;
-  color: rgb(255, 255, 255);
-  border: none;
+  font-family: 'Manrope', serif; 
+  font-size: 45px; 
+  color: rgb(255, 255, 255); 
+  border: none; 
   background: none;
-  padding: 0;
-  display: inline-flex;
+  padding: 0; 
+  display: inline-flex; 
   align-items: center;
   justify-content: center;
   text-align: center;
   cursor: pointer;
   z-index: 2;
+  position: fixed;
+  top: 50%; 
+  right: 20%; 
+  transform: translateY(-50%); 
+  letter-spacing: 1px;
+
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.letter-button-4:hover {
+  opacity: 1;
+}
+
+.letter-button-4:not(:hover) {
+  opacity: 0;
+}
+
+
+.fade-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-out;
+  z-index: 9999;
+}
+
+
+section {
+  position: relative;
+  z-index: 1;
 }
 
 
@@ -97,15 +168,6 @@ a {
 /* Button Click: Slightly decrease in size */
 .letter-button-home:active, .letter-button-1:active, .letter-button-2:active, .letter-button-3:active, .letter-button-4:active {
   transform: scale(0.95); /* Slight decrease in size */
-}
-
-/* Button Positioning */
-.letter-button-home {
-  font-size: 180px;
-  position: fixed;
-  bottom: 253px;
-  right: 428px;
-  opacity: 0;
 }
 
 .letter-button-1 {
@@ -133,34 +195,4 @@ a {
   left: 150px;
   letter-spacing: 1px;
   opacity: 1;
-}
-
-.letter-button-4 {
-  font-size: 45px;
-  position: fixed;
-  top: 50%;
-  right: 20%;
-  transform: translateY(-50%);
-  letter-spacing: 1px;
-  opacity: 0;
-}
-
-/* Fade to Black Overlay */
-.fade-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black; /* Set the overlay color to black */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease-out;
-  z-index: 9999;
-}
-
-/* Fade in the overlay after a slight delay */
-section {
-  position: relative;
-  z-index: 1;
 }
