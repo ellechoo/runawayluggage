@@ -337,7 +337,7 @@ const preload = () => {
 
 
 
-document.querySelector('.letter-button-end').addEventListener('click', function () {
+document.querySelector('.letter-button-home').addEventListener('click', function () {
     const overlay = document.querySelector('.fade-overlay');
     const button = this;
 
