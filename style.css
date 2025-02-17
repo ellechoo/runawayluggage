@@ -114,6 +114,7 @@ a {
   position: fixed;
   top: 350px;
   left: 320px;
+  letter-spacing: 1px;
   
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
@@ -148,6 +149,7 @@ a {
   position: fixed;
   bottom: 250px;
   left: 300px;
+  letter-spacing: 1px;
   
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
@@ -183,6 +185,7 @@ a {
   position: fixed;
   bottom: 350px;
   left: 350px;
+  letter-spacing: 1px;
   
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
@@ -216,6 +219,7 @@ a {
   top: 50%; /* Centers vertically */
   right: 20%; /* Makes it positioned from the right, but not fully at the edge */
   transform: translateY(-50%); /* Ensures it's vertically centered */
+  letter-spacing: 1px;
 
   opacity: 0;
   transition: opacity 0.5s ease-in-out;

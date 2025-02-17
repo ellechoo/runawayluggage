@@ -99,7 +99,7 @@ const preload = () => {
     
             text: 'runaway\nluggage .',
             amount: 1600,
-            particleSize: 1.3,
+            particleSize: 1.2,
             particleColor: 0xffffff,
             textSize: 18,
             area: 250,
@@ -163,7 +163,7 @@ const preload = () => {
                 let py = pos.getY(i);
                 let pz = pos.getZ(i);
     
-                this.colorChange.setHSL( 0.55 , 0.6 , 0.34 );
+                this.colorChange.setHSL( 0.55 , 0.6 , 0.3 );
                 coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
                 coulors.needsUpdate = true;
     
