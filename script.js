@@ -337,5 +337,23 @@ const preload = () => {
 
 
 
+document.querySelector('.letter-button-end').addEventListener('click', function () {
+    const overlay = document.querySelector('.fade-overlay');
+    const button = this;
 
+    // Fade out the button
+    button.style.transition = 'transform 0.2s ease, opacity 0.5s ease';
+    button.style.transform = 'scale(0.9)';
+    button.style.opacity = 0;
+
+    // overlay fade
+    setTimeout(() => {
+        overlay.style.opacity = 1;
+    }, 500); // 500ms delay
+
+    // Redirect after full fade
+    setTimeout(() => {
+        window.location.href = 'index.html'; 
+    }, 1500); // Total delay of 1.5s
+});
 
