@@ -47,6 +47,12 @@ h1 {
   transform: scale(1.08);
 }
 
+.letter-button-end:active {
+  transform: scale(0.95); /* Slight decrease in size */
+}
+
+
+
 svg {
   width: 80vw;
   height: 40vh;
