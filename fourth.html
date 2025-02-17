@@ -15,10 +15,9 @@
     </section>
 
     <div class="background"></div>
-
     <div id="magic"></div>
 
-    <!-- Fade overlay element -->
+    <!-- Full-screen fade overlay -->
     <div class="fade-overlay"></div>
 
     <script id="vertexshader" type="x-shader/x-vertex">
@@ -50,21 +49,11 @@
     <script>
       // Fade to white and transition to the next page
       document.querySelector('.letter-button-4').addEventListener('click', function () {
-        const button = this;
         const overlay = document.querySelector('.fade-overlay');
-        
-        // Get the position of the button
-        const buttonRect = button.getBoundingClientRect();
-        
-        // Set the overlay position to start at the button
-        overlay.style.top = buttonRect.top + 'px';
-        overlay.style.left = buttonRect.left + 'px';
-        overlay.style.width = buttonRect.width + 'px';
-        overlay.style.height = buttonRect.height + 'px';
-        
-        // Trigger the fade effect by changing the opacity
+
+        // Trigger the fade effect by changing opacity
         overlay.style.opacity = 1;
-        
+
         // After the fade is complete, navigate to the next page
         setTimeout(function() {
           window.location.href = 'end.html'; // Replace with your next page URL
