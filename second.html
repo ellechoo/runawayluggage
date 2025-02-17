@@ -8,6 +8,9 @@
   </head>
 
   <body>
+
+    <div class="fade-overlay-black"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <section>
@@ -47,6 +50,23 @@
 
 
     <script src="script2.js"></script>
+
+
+
+    <script>
+      document.querySelector('.letter-button-2').addEventListener('click', function () {
+        const overlay = document.querySelector('.fade-overlay');
+
+        // Apply transition effect
+        overlay.style.transition = 'opacity 1s ease-in-out';
+        overlay.style.opacity = 1;
+
+        // Wait for fade-out to complete before redirecting
+        setTimeout(function() {
+          window.location.href = 'third.html'; 
+        }, 1000); 
+      });
+    </script>
 
   </body>
 </html>

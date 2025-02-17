@@ -333,14 +333,3 @@ const preload = () => {
     }
 }
 
-document.querySelectorAll('.letter-button-home, .letter-button-1, .letter-button-2, .letter-button-3').forEach(button => {
-    button.addEventListener('click', function() {
-      // Apply the 'faded' class to the button
-      this.classList.add('faded');
-      
-      // Optional: Wait for the fade-out transition to finish, then redirect to the next page
-      setTimeout(() => {
-        window.location.href = 'second.html'; // Change to your actual URL
-      }, 500); // Match this delay with your transition duration (0.5s)
-    });
-  });

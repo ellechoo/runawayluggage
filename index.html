@@ -9,6 +9,8 @@
 
   <body>
 
+    <div class="fade-overlay-black"></div>
+
     <section>
       <a href="first.html">
         <button class="letter-button-home">.</button>
@@ -47,8 +49,24 @@
       }
     </script>
 
-
     <script src="script.js"></script>
+
+
+
+    <script>
+      document.querySelector('.letter-button-home').addEventListener('click', function () {
+        const overlay = document.querySelector('.fade-overlay');
+
+        // Apply transition effect
+        overlay.style.transition = 'opacity 1s ease-in-out';
+        overlay.style.opacity = 1;
+
+        // Wait for fade-out to complete before redirecting
+        setTimeout(function() {
+          window.location.href = 'first.html'; 
+        }, 1000); 
+      });
+    </script>
 
   </body>
 </html>
