@@ -124,8 +124,7 @@ a {
   z-index: 2;
   position: fixed;
   top: 50%; 
-  right: 20%; 
-  transform: translateY(-50%); 
+  right: 20%;
   letter-spacing: 1px;
 
   opacity: 1;
@@ -166,7 +165,7 @@ section {
 
 /* Button Click: Slightly decrease in size */
 .letter-button-home:active, .letter-button-1:active, .letter-button-2:active, .letter-button-3:active, .letter-button-4:active {
-  transform: scale(0.95); /* Slight decrease in size */
+  transform: scale(0.90); /* Slight decrease in size */
 }
 
 .letter-button-1 {
@@ -182,7 +181,7 @@ section {
   font-size: 55px;
   position: fixed;
   top: 100px;
-  right: 410px;
+  right: 500px;
   letter-spacing: 1px;
   opacity: 1;
 }
