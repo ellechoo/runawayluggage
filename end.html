@@ -19,5 +19,52 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="endpage(desc).js"></script>
+
+
+
+
+    <div class="fade-overlay"></div>
+
+    <script id="vertexshader" type="x-shader/x-vertex">
+      attribute float size;
+      attribute vec3 customColor;
+      varying vec3 vColor;
+
+      void main() {
+        vColor = customColor;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = size * (300.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+      }
+    </script>
+
+    <script id="fragmentshader" type="x-shader/x-fragment">
+      uniform vec3 color;
+      uniform sampler2D pointTexture;
+      varying vec3 vColor;
+
+      void main() {
+        gl_FragColor = vec4(color * vColor, 1.0);
+        gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+      }
+    </script>
+
+    <script src="script4.js"></script>
+
+    <script>
+      // Fade to white and transition to the next page
+      document.querySelector('.letter-button-4').addEventListener('click', function () {
+        const overlay = document.querySelector('.fade-overlay');
+
+        // Trigger the fade effect by changing opacity
+        overlay.style.opacity = 1;
+
+        // After the fade is complete, navigate to the next page
+        setTimeout(function() {
+          window.location.href = 'end.html'; // Replace with your next page URL
+        }, 1000); // Match the duration of the transition (1s)
+      });
+    </script>
+    
   </body>
 </html>
