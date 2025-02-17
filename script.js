@@ -99,7 +99,7 @@ const preload = () => {
     
             text: 'runaway\nluggage .',
             amount: 1600,
-            particleSize: 1,
+            particleSize: 1.3,
             particleColor: 0xffffff,
             textSize: 18,
             area: 250,
