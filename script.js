@@ -163,7 +163,7 @@ const preload = () => {
                 let py = pos.getY(i);
                 let pz = pos.getZ(i);
     
-                this.colorChange.setHSL( 0.58 , 0.7 , 0.28 );
+                this.colorChange.setHSL( 0.59 , 0.8 , 0.27 );
                 coulors.setXYZ( i, this.colorChange.r, this.colorChange.g, this.colorChange.b )
                 coulors.needsUpdate = true;
     
