@@ -57,195 +57,93 @@ a {
 
 
 
-
-
-/*DONT TOUCH*/
-.letter-button-home {
-  font-family: 'Jackgo', sans-serif; 
-  font-size: 180px; 
-  width: auto; 
-  height: auto; 
-  color: white; 
-  border: none; 
+/* CHANGES */
+.letter-button-home, .letter-button-1, .letter-button-2, .letter-button-3, .letter-button-4 {
+  font-family: 'Manrope', serif;
+  color: rgb(255, 255, 255);
+  border: none;
   background: none;
-  padding: 0; 
-  display: inline-flex; 
+  padding: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   cursor: pointer;
   z-index: 2;
+  transition: opacity 0.5s ease-in-out, transform 0.2s ease; /* Add transition for scale */
+}
+
+/* Button Hover: Increase in size */
+.letter-button-home:hover, .letter-button-1:hover, .letter-button-2:hover, .letter-button-3:hover, .letter-button-4:hover {
+  transform: scale(1.1); /* Slightly increase in size */
+}
+
+/* Button Click: Slightly decrease in size */
+.letter-button-home:active, .letter-button-1:active, .letter-button-2:active, .letter-button-3:active, .letter-button-4:active {
+  transform: scale(0.95); /* Slight decrease in size */
+}
+
+/* Button Positioning */
+.letter-button-home {
+  font-size: 180px;
   position: fixed;
   bottom: 253px;
   right: 428px;
-
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.letter-button-home:hover {
-  opacity: 1;
-}
-
-.letter-button-home:not(:hover) {
   opacity: 0;
 }
-
-
-
-
-
 
 .letter-button-1 {
-  font-family: 'Manrope', serif; 
-  font-size: 60px; 
-  width: auto; 
-  height: auto; 
-  color: rgb(255, 255, 255); 
-  border: none; 
-  background: none;
-  padding: 0; 
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  z-index: 2;
+  font-size: 60px;
   position: fixed;
   top: 350px;
   left: 320px;
   letter-spacing: 1px;
-  
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.letter-button-1:hover {
   opacity: 1;
 }
-
-.letter-button-1:not(:hover) {
-  opacity: 1;
-}
-
-
-
 
 .letter-button-2 {
-  font-family: 'Manrope', serif; 
-  font-size: 55px; 
-  width: auto; 
-  height: auto; 
-  color: rgb(255, 255, 255);  
-  border: none; 
-  background: none;
-  padding: 0; 
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  z-index: 2;
+  font-size: 55px;
   position: fixed;
   top: 100px;
-  right: 300px;
+  right: 370px;
   letter-spacing: 1px;
-  
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.letter-button-2:hover {
   opacity: 1;
 }
-
-.letter-button-2:not(:hover) {
-  opacity: 1;
-}
-
-
 
 .letter-button-3 {
-  font-family: 'Manrope', serif; 
-  font-size: 50px; 
-  width: auto; 
-  height: auto; 
-  color: rgb(255, 255, 255); 
-  border: none; 
-  background: none;
-  padding: 0; 
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  z-index: 2;
+  font-size: 50px;
   position: fixed;
   bottom: 100px;
   left: 150px;
   letter-spacing: 1px;
-  
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.letter-button-3:hover {
   opacity: 1;
 }
-
-.letter-button-3:not(:hover) {
-  opacity: 1;
-}
-
-
-
 
 .letter-button-4 {
-  font-family: 'Manrope', serif; 
-  font-size: 45px; 
-  color: rgb(255, 255, 255); 
-  border: none; 
-  background: none;
-  padding: 0; 
-  display: inline-flex; 
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  z-index: 2;
+  font-size: 45px;
   position: fixed;
-  top: 50%; 
-  right: 20%; 
-  transform: translateY(-50%); 
+  top: 50%;
+  right: 20%;
+  transform: translateY(-50%);
   letter-spacing: 1px;
-
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.letter-button-4:hover {
-  opacity: 1;
-}
-
-.letter-button-4:not(:hover) {
   opacity: 0;
 }
 
-
+/* Fade to Black Overlay */
 .fade-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: white;
+  background-color: black; /* Set the overlay color to black */
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease-out;
   z-index: 9999;
 }
 
-
+/* Fade in the overlay after a slight delay */
 section {
   position: relative;
   z-index: 1;
