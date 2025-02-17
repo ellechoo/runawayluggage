@@ -216,9 +216,9 @@ a {
   cursor: pointer;
   z-index: 2;
   position: fixed;
-  top: 50%; /* Centers vertically */
-  right: 20%; /* Makes it positioned from the right, but not fully at the edge */
-  transform: translateY(-50%); /* Ensures it's vertically centered */
+  top: 50%; 
+  right: 20%; 
+  transform: translateY(-50%); 
   letter-spacing: 1px;
 
   opacity: 0;

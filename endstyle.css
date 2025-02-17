@@ -50,11 +50,11 @@ h1 {
 svg {
   width: 80vw;
   height: 40vh;
-  position: absolute; /* Keeps the SVG layer separate from the centered content */
-  top: 50%; /* Centers vertically */
-  left: 50%; /* Centers horizontally */
-  transform: translate(-50%, -50%); /* Centers the SVG element */
-  z-index: -1; /* Ensures SVG stays behind text */
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  z-index: -1; 
 }
 
 path {
@@ -63,8 +63,8 @@ path {
 
 text {
   font-family: 'Jackgo', sans-serif;
-  font-size: 40px; /* Increase font size for better visibility */
-  fill: #fff; /* Make the text visible */
+  font-size: 40px; 
+  fill: #fff; 
   stroke: #fff;
   font-weight: bold;
 }
