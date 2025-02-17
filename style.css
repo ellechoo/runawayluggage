@@ -194,3 +194,10 @@ section {
   letter-spacing: 1px;
   opacity: 1;
 }
+
+
+.faded {
+  background-color: black;
+  color: black;
+  opacity: 0;
+}
