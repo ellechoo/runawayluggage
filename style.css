@@ -148,7 +148,7 @@ a {
   z-index: 2;
   position: fixed;
   top: 100px;
-  right: 200px;
+  right: 300px;
   letter-spacing: 1px;
   
   opacity: 1;
@@ -162,8 +162,6 @@ a {
 .letter-button-2:not(:hover) {
   opacity: 1;
 }
-
-
 
 
 
@@ -184,7 +182,7 @@ a {
   z-index: 2;
   position: fixed;
   bottom: 100px;
-  left: 100px;
+  left: 150px;
   letter-spacing: 1px;
   
   opacity: 1;
