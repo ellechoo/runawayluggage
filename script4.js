@@ -98,8 +98,8 @@ const preload = () => {
         this.data = {
     
 			text: 'Baby, today I dont wanna go there\nIts way too much to carry on my shoulders\nDont say to me its part of getting older\n Baby, I dont wanna go.',
-            amount: 360,
-            particleSize: 0.45,
+            amount: 400,
+            particleSize: 0.48,
             particleColor: 0xffffff,
             textSize: 5,
             area: 100,
@@ -238,7 +238,7 @@ const preload = () => {
         geometry.computeBoundingBox();
     
         const xMid = - 0.8 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
-        const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.85;
+        const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.0;
     
         geometry.center();
     
