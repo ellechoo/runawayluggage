@@ -41,6 +41,7 @@ h1 {
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
+  animation-delay: 0.5s;
 }
 
 .letter-button-end:hover {
@@ -52,6 +53,22 @@ h1 {
 }
 
 
+h1, .letter-button-end {
+  opacity: 0; /* Initially invisible */
+  transform: translateY(20px); /* Slight movement */
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 svg {
   width: 80vw;
