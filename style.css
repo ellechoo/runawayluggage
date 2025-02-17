@@ -147,7 +147,7 @@ a {
   background-color: white;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 2s ease-out;
+  transition: opacity 1s ease-out;
   z-index: 9999;
 }
 

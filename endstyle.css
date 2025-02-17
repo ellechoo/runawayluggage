@@ -57,6 +57,7 @@ h1, .letter-button-end {
   opacity: 0; /* Initially invisible */
   transform: translateY(20px); /* Slight movement */
   animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
 }
 
 @keyframes fadeIn {
