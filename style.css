@@ -126,7 +126,7 @@ a {
   transform: translateY(-50%); 
   letter-spacing: 1px;
 
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -135,7 +135,7 @@ a {
 }
 
 .letter-button-4:not(:hover) {
-  opacity: 0;
+  opacity: 1;
 }
 
 
