@@ -16,7 +16,7 @@ body, html {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  flex-direction: column; /* Makes the content stack vertically */
+  flex-direction: column;
 }
 
 h1 {
@@ -26,6 +26,10 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 0;
+  opacity: 0; /* Initially invisible */
+  transform: translateY(20px); /* Slight movement */
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
 }
 
 .letter-button-end {
@@ -41,8 +45,11 @@ h1 {
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s ease-in-out; /* Ensure smooth transform */
-
-  will-change: transform; /* Helps the browser optimize */
+  will-change: transform; /* Optimize for animation */
+  opacity: 0; /* Initially invisible */
+  transform: translateY(20px); /* Slight movement */
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 1s; /* Delay to ensure button fades after h1 */
 }
 
 .letter-button-end:hover {
@@ -51,13 +58,6 @@ h1 {
 
 .letter-button-end:active {
   transform: scale(0.95); /* Slight decrease in size */
-}
-
-h1, .letter-button-end {
-  opacity: 0; /* Initially invisible */
-  transform: translateY(20px); /* Slight movement */
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 0.5s;
 }
 
 @keyframes fadeIn {
