@@ -237,7 +237,7 @@ const preload = () => {
         let geometry = new THREE.ShapeGeometry( shapes );
         geometry.computeBoundingBox();
     
-        const xMid = - 0.8 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+        const xMid = - 0.6 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
         const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/2.0;
     
         geometry.center();
