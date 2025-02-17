@@ -54,6 +54,7 @@ h1 {
 
 .letter-button-end:hover {
   transform: scale(1.08);
+  color:rgb(10, 10, 154);
 }
 
 .letter-button-end:active {
