@@ -353,7 +353,7 @@ document.querySelector('.letter-button-home').addEventListener('click', function
 
     // Redirect after full fade
     setTimeout(() => {
-        window.location.href = 'index.html'; 
+        window.location.href = 'first.html'; 
     }, 1500); // Total delay of 1.5s
 });
 
