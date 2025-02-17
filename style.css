@@ -103,9 +103,7 @@ a {
   text-align: center;
   cursor: pointer;
   z-index: 2;
-  transition: opacity 0.5s ease-in-out, transform 0.2s ease;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
+  transform: 0.2s ease;
 }
 
 
@@ -127,7 +125,7 @@ a {
   right: 20%;
   letter-spacing: 1px;
 
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -136,7 +134,7 @@ a {
 }
 
 .letter-button-4:not(:hover) {
-  opacity: 1;
+  opacity: 0;
 }
 
 
@@ -174,7 +172,6 @@ section {
   top: 350px;
   left: 320px;
   letter-spacing: 1px;
-  opacity: 1;
 }
 
 .letter-button-2 {
@@ -183,7 +180,6 @@ section {
   top: 100px;
   right: 500px;
   letter-spacing: 1px;
-  opacity: 1;
 }
 
 .letter-button-3 {
@@ -192,10 +188,23 @@ section {
   bottom: 100px;
   left: 150px;
   letter-spacing: 1px;
+}
+
+/* Initially hidden */
+.letter-button-1, .letter-button-2, .letter-button-3 {
+  opacity: 0; /* Start invisible */
+  transition: opacity 0.5s ease-in-out, transform 0.2s ease; /* Smooth transition */
+}
+
+/* Fade in on hover */
+.letter-button-1:hover, .letter-button-2:hover, .letter-button-3:hover {
   opacity: 1;
 }
 
-
+/* Ensures they fade out again when not hovered */
+.letter-button-1:not(:hover), .letter-button-2:not(:hover), .letter-button-3:not(:hover) {
+  opacity: 0;
+}
 
 
 .fade-overlay-black {
