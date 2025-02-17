@@ -162,10 +162,7 @@ section {
 
 
 
-/* Button Hover: Increase in size */
-.letter-button-home:hover, .letter-button-1:hover, .letter-button-2:hover, .letter-button-3:hover {
-  transform: scale(1.1); /* Slightly increase in size */
-}
+
 
 /* Button Click: Slightly decrease in size */
 .letter-button-home:active, .letter-button-1:active, .letter-button-2:active, .letter-button-3:active, .letter-button-4:active {
@@ -185,7 +182,7 @@ section {
   font-size: 55px;
   position: fixed;
   top: 100px;
-  right: 370px;
+  right: 410px;
   letter-spacing: 1px;
   opacity: 1;
 }
