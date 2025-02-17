@@ -163,7 +163,7 @@ section {
 
 
 /* Button Hover: Increase in size */
-.letter-button-home:hover, .letter-button-1:hover, .letter-button-2:hover, .letter-button-3:hover, .letter-button-4:hover {
+.letter-button-home:hover, .letter-button-1:hover, .letter-button-2:hover, .letter-button-3:hover {
   transform: scale(1.1); /* Slightly increase in size */
 }
 
