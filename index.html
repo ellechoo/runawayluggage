@@ -95,7 +95,7 @@
         word.style.position = "absolute"; // Ensure it follows positioning
         word.style.left = `${x}px`;
         word.style.top = `${y}px`;
-        word.style.fontSize = "20px"; // Ensure a reasonable size
+        word.style.fontSize = `${Math.random() * (50 - 10) + 10}px`;
         word.style.opacity = (Math.random() * (0.6 - 0.1) + 0.1).toFixed(2);
 
         background.appendChild(word);
@@ -104,7 +104,7 @@
         setTimeout(() => {
             console.log("🗑️ Removing word");
             word.remove();
-        }, 3000);
+        }, 2500);
       }
 
       // Create words at intervals
