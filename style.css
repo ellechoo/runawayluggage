@@ -238,6 +238,6 @@ section {
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
   user-select: none;
-  z-index: -2; /* Ensure it's below particles but above background */
+  z-index: 0; /* Ensure it's below particles but above background */
 }
 
