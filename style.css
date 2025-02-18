@@ -219,3 +219,24 @@ section {
   transition: opacity 1s ease-out; /* Smooth transition */
   z-index: 9999; /* Ensures it's on top */
 }
+
+
+/*BACKGROUND WORDS*/
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3; /* Behind everything */
+}
+
+.floating-word {
+  position: absolute;
+  font-family: 'Manrope', serif; /* Change to your font */
+  color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+  white-space: nowrap;
+  pointer-events: none; /* Prevent interaction */
+  user-select: none;
+  transition: opacity 1s ease-in-out;
+}

@@ -65,5 +65,52 @@
       });
     </script>
 
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+      const background = document.querySelector(".background");
+
+      const text = "touch the white letters";
+
+      function createFloatingText() {
+        const word = document.createElement("div");
+        word.classList.add("floating-word");
+        word.textContent = text;
+
+        // Random position
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+
+        // Random size
+        const fontSize = Math.random() * 30 + 10;
+
+        // Random opacity
+        const opacity = Math.random() * 0.4 + 0.2;
+
+        // Apply styles
+        word.style.left = `${x}px`;
+        word.style.top = `${y}px`;
+        word.style.fontSize = `${fontSize}px`;
+        word.style.opacity = opacity;
+
+        background.appendChild(word);
+
+        // Remove word after a few seconds
+        setTimeout(() => {
+            word.remove();
+        }, 3000); // Disappears after 5 seconds
+      }
+
+      // Create words at intervals
+       setInterval(() => {
+        createFloatingText();
+        createFloatingText(); // Creates 2 at a time
+        if (Math.random() > 0.5) createFloatingText(); // Sometimes creates 3
+      }, 2000); // Every 2 seconds
+      });
+
+    </script>
+
   </body>
 </html>
