@@ -73,7 +73,7 @@ a {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 99999;
   position: fixed;
   bottom: 253px;
   right: 428px;
@@ -234,7 +234,7 @@ section {
 .floating-word {
   position: absolute;
   font-family: 'Manrope', serif; /* Ensure this font is loading */
-  color: rgba(255, 255, 255, 1); /* Fully visible white */
+  color: rgba(255, 255, 255, 0.7); /* Fully visible white */
   background-color: none;
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
