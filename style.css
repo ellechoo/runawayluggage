@@ -23,7 +23,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 4;
+  z-index: -3;
 }
 
 .playground {
@@ -73,7 +73,7 @@ a {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  z-index: 5;
+  z-index: 3;
   position: fixed;
   bottom: 253px;
   right: 428px;
@@ -228,7 +228,7 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -2; /* Ensure it's behind everything */
+  z-index: 1; /* Ensure it's behind everything */
 }
 
 .floating-word {
@@ -239,6 +239,6 @@ section {
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
   user-select: none;
-  z-index: -1; /* Ensure it's below particles but above background */
+  z-index: 2; /* Ensure it's below particles but above background */
 }
 
