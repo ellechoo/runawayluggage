@@ -78,7 +78,7 @@ a {
   bottom: 253px;
   right: 428px;
 
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -87,7 +87,7 @@ a {
 }
 
 .letter-button-home:not(:hover) {
-  opacity: 0;
+  opacity: 1;
 }
 
 
