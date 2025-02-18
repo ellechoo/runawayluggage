@@ -235,6 +235,7 @@ section {
   position: absolute;
   font-family: 'Manrope', serif; /* Ensure this font is loading */
   color: rgba(255, 255, 255, 1); /* Fully visible white */
+  background-color: red;
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
   user-select: none;
