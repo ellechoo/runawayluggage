@@ -21,11 +21,11 @@ body, html {
 
 h1 {
   font-family: 'Jackgo', sans-serif;
-  font-size: 120px;
+  font-size: 140px;
   color: rgb(0, 0, 0);
   text-align: center;
   margin: 0;
-  padding: 1;
+  padding: 5;
   opacity: 0; /* Initially invisible */
   transform: translateY(20px); /* Slight movement */
   animation: fadeIn 1s ease-out forwards;
@@ -34,7 +34,7 @@ h1 {
 
 .letter-button-end {
   font-family: 'Manrope', sans-serif;
-  font-size: 50px;
+  font-size: 40px;
   color: rgb(0, 0, 0);
   border: none;
   background: none;
@@ -44,8 +44,8 @@ h1 {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out; /* Ensure smooth transform */
-  will-change: transform; /* Optimize for animation */
+  transition: transform 0.2s ease-in-out, color 0.3s ease; /* Ensure smooth transform and color transition */
+  will-change: transform, color; /* Optimize for animation */
   opacity: 0; /* Initially invisible */
   transform: translateY(20px); /* Slight movement */
   animation: fadeIn 1s ease-out forwards;
@@ -54,7 +54,7 @@ h1 {
 
 .letter-button-end:hover {
   transform: scale(1.08);
-  color:rgb(10, 10, 154);
+  color:rgb(12, 12, 188);
 }
 
 .letter-button-end:active {
