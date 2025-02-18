@@ -105,15 +105,15 @@
             console.log("🗑️ Removing word");
             word.remove();
         }, 3000);
-    }
+      }
 
-    // Create words at intervals
-    setInterval(() => {
+      // Create words at intervals
+      setInterval(() => {
         createFloatingText();
         createFloatingText(); // Creates 2 at a time
         if (Math.random() > 0.5) createFloatingText(); // Sometimes creates 3
-    }, 2000);
-});
+      }, 2000);
+      });
 
     </script>
 
