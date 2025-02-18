@@ -73,7 +73,7 @@ a {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  z-index: 5;
+  z-index: 9999;
   position: fixed;
   bottom: 253px;
   right: 428px;
@@ -148,7 +148,7 @@ a {
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease-out;
-  z-index: 9999;
+  z-index: 9998;
 }
 
 
@@ -217,7 +217,7 @@ section {
   opacity: 0; /* Initially hidden */
   pointer-events: none; /* Prevents interaction while fading */
   transition: opacity 1s ease-out; /* Smooth transition */
-  z-index: 9999; /* Ensures it's on top */
+  z-index: 9998; /* Ensures it's on top */
 }
 
 
@@ -235,7 +235,7 @@ section {
   position: absolute;
   font-family: 'Manrope', serif; /* Ensure this font is loading */
   color: rgba(255, 255, 255, 1); /* Fully visible white */
-  background-color: red;
+  background-color: none;
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
   user-select: none;
