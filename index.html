@@ -96,24 +96,34 @@
         word.style.left = `${x}px`;
         word.style.top = `${y}px`;
         word.style.fontSize = `${Math.random() * (50 - 10) + 10}px`;
-        word.style.opacity = (Math.random() * (0.7 - 0.2) + 0.2).toFixed(2);
+        
+        const randomOpacity = Math.random() * (0.7 - 0.2) + 0.2;
+        word.style.opacity = 0;
 
         background.appendChild(word);
 
-        // Remove word after a few seconds
+        //fade in
         setTimeout(() => {
-            console.log("🗑️ Removing word");
-            word.remove();
-        }, 2500);
-      }
+          word.style.transition = "opacity 2s"; // Smooth transition for fade-in and fade-out
+          word.style.opacity = randomOpacity;
+        }, 10); // Delay to trigger CSS transition after adding the element
 
-      // Create words at intervals
-      setInterval(() => {
-        const numberOfWords = 5; // Adjust this to increase the number of words appearing
-        for (let i = 0; i < numberOfWords; i++) {
-            createFloatingText();
+          // Remove word after a few seconds with a fade-out
+          setTimeout(() => {
+           word.style.opacity = 0;  // Fade-out
+           setTimeout(() => {
+              console.log("🗑️ Removing word");
+              word.remove();
+            }, 2000); // Wait for fade-out transition to complete before removing
+          }, 2500);
         }
-      }, 2000);
+
+        setInterval(() => {
+          const numberOfWords = 5;
+          for (let i = 0; i < numberOfWords; i++) {
+            createFloatingText();
+          }
+        }, 2000);
       });
     </script>
 
