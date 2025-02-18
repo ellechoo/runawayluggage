@@ -26,6 +26,7 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 5;
+  margin-bottom: 10px;
   opacity: 0; /* Initially invisible */
   transform: translateY(20px); /* Slight movement */
   animation: fadeIn 1s ease-out forwards;

@@ -98,8 +98,8 @@ const preload = () => {
         this.data = {
     
 			text: 'Baby, today I dont wanna g o - - - th e r e .\nIts way too much to carry on m y - - - - - sho ul d e r s .\nDont say to me its part of getting - - - ol d e r .\nBaby, I dont wanna - - - g o .',
-            amount: 400,
-            particleSize: 0.48,
+            amount: 450,
+            particleSize: 0.49,
             particleColor: 0xffffff,
             textSize: 5,
             area: 100,
@@ -237,7 +237,7 @@ const preload = () => {
         let geometry = new THREE.ShapeGeometry( shapes );
         geometry.computeBoundingBox();
     
-        const xMid = -0.2 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
+        const xMid = -0.6 * ( geometry.boundingBox.max.x - geometry.boundingBox.min.x );
         const yMid =  (geometry.boundingBox.max.y - geometry.boundingBox.min.y)/3.3;
     
         geometry.center();
