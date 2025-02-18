@@ -228,16 +228,16 @@ section {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -3; /* Ensure it's behind everything */
+  z-index: -2; /* Ensure it's behind everything */
 }
 
 .floating-word {
-  position: absolute; /* Ensure words are positioned within the background */
-  font-family: 'Manrope', serif; /* Change to your font */
-  color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+  position: absolute;
+  font-family: 'Manrope', serif; /* Ensure this font is loading */
+  color: rgba(255, 255, 255, 1); /* Fully visible white */
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
   user-select: none;
-  transition: opacity 1s ease-in-out;
+  z-index: -2; /* Ensure it's below particles but above background */
 }
 
