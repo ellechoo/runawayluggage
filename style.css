@@ -79,7 +79,7 @@ a {
   bottom: 253px;
   right: 428px;
 
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -88,7 +88,7 @@ a {
 }
 
 .letter-button-home:not(:hover) {
-  opacity: 1;
+  opacity: 0;
 }
 
 
@@ -236,7 +236,7 @@ section {
 .floating-word {
   position: absolute;
   font-family: 'Manrope', serif; /* Ensure this font is loading */
-  color: rgba(255, 255, 255, 0.7); /* Fully visible white */
+  color: rgba(0, 98, 255, 0.5); /* Fully visible white */
   background-color: none;
   white-space: nowrap;
   pointer-events: none; /* Prevent interaction */
