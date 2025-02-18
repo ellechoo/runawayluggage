@@ -60,6 +60,7 @@ a {
 /* CHANGES */
 
 .letter-button-home {
+  pointer-events: auto;
   font-family: 'Jackgo', sans-serif; 
   font-size: 180px; 
   width: auto; 
@@ -223,6 +224,7 @@ section {
 
 /*BACKGROUND WORDS*/
 .background {
+  pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
