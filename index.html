@@ -68,19 +68,19 @@
 
 
     <script>
-    console.log("✅ JavaScript is running!");
+      console.log("✅ JavaScript is running!");
 
-    document.addEventListener("DOMContentLoaded", function () {
-    const background = document.querySelector(".background");
+      document.addEventListener("DOMContentLoaded", function () {
+      const background = document.querySelector(".background");
 
-    if (!background) {
+      if (!background) {
         console.error("❌ ERROR: .background element not found!");
         return;
-    }
+       }
 
-    const text = "find and touch the white words";
+      const text = "find and touch the white words";
 
-    function createFloatingText() {
+      function createFloatingText() {
         const word = document.createElement("div");
         word.classList.add("floating-word");
         word.textContent = text;
@@ -96,7 +96,7 @@
         word.style.left = `${x}px`;
         word.style.top = `${y}px`;
         word.style.fontSize = `${Math.random() * (50 - 10) + 10}px`;
-        word.style.opacity = (Math.random() * (0.6 - 0.1) + 0.1).toFixed(2);
+        word.style.opacity = (Math.random() * (0.7 - 0.2) + 0.2).toFixed(2);
 
         background.appendChild(word);
 
@@ -109,12 +109,12 @@
 
       // Create words at intervals
       setInterval(() => {
-        createFloatingText();
-        createFloatingText(); // Creates 2 at a time
-        if (Math.random() > 0.5) createFloatingText(); // Sometimes creates 3
+        const numberOfWords = 5; // Adjust this to increase the number of words appearing
+        for (let i = 0; i < numberOfWords; i++) {
+            createFloatingText();
+        }
       }, 2000);
       });
-
     </script>
 
   </body>
