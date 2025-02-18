@@ -223,16 +223,16 @@ section {
 
 /*BACKGROUND WORDS*/
 .background {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -3; /* Behind everything */
+  z-index: -3; /* Ensure it's behind everything */
 }
 
 .floating-word {
-  position: absolute;
+  position: absolute; /* Ensure words are positioned within the background */
   font-family: 'Manrope', serif; /* Change to your font */
   color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
   white-space: nowrap;
@@ -240,3 +240,4 @@ section {
   user-select: none;
   transition: opacity 1s ease-in-out;
 }
+

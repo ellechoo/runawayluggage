@@ -70,8 +70,7 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
       const background = document.querySelector(".background");
-
-      const text = "touch the white letters";
+      const text = "Your Sentence Here"; // Change this to your desired text
 
       function createFloatingText() {
         const word = document.createElement("div");
@@ -83,10 +82,10 @@
         const y = Math.random() * window.innerHeight;
 
         // Random size
-        const fontSize = Math.random() * 30 + 10;
+        const fontSize = Math.random() * 40 + 20; // Between 20px and 60px
 
         // Random opacity
-        const opacity = Math.random() * 0.4 + 0.2;
+        const opacity = Math.random() * 0.6 + 0.2; // Between 0.2 and 0.8
 
         // Apply styles
         word.style.left = `${x}px`;
@@ -99,11 +98,11 @@
         // Remove word after a few seconds
         setTimeout(() => {
             word.remove();
-        }, 3000); // Disappears after 5 seconds
+        }, 5000); // Disappears after 5 seconds
       }
 
       // Create words at intervals
-       setInterval(() => {
+      setInterval(() => {
         createFloatingText();
         createFloatingText(); // Creates 2 at a time
         if (Math.random() > 0.5) createFloatingText(); // Sometimes creates 3
