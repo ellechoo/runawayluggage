@@ -27,8 +27,8 @@ h1 {
   margin: 0;
   padding: 5;
   margin-bottom: 10px;
-  opacity: 0; /* Initially invisible */
-  transform: translateY(20px); /* Slight movement */
+  opacity: 0; 
+  transform: translateY(20px); 
   animation: fadeIn 1s ease-out forwards;
   animation-delay: 0.5s;
 }
@@ -45,12 +45,12 @@ h1 {
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, color 0.3s ease; /* Ensure smooth transform and color transition */
-  will-change: transform, color; /* Optimize for animation */
-  opacity: 0; /* Initially invisible */
-  transform: translateY(20px); /* Slight movement */
+  transition: transform 0.2s ease-in-out, color 0.3s ease; 
+  will-change: transform, color; 
+  opacity: 0; 
+  transform: translateY(20px); 
   animation: fadeIn 1s ease-out forwards;
-  animation-delay: 1s; /* Delay to ensure button fades after h1 */
+  animation-delay: 1s; 
 }
 
 .letter-button-end:hover {
@@ -59,7 +59,7 @@ h1 {
 }
 
 .letter-button-end:active {
-  transform: scale(0.95); /* Slight decrease in size */
+  transform: scale(0.95); 
 }
 
 @keyframes fadeIn {
@@ -69,7 +69,7 @@ h1 {
   }
   to {
     opacity: 1;
-    transform: none; /* Ensures no transform conflicts */
+    transform: none; 
   }
 }
 

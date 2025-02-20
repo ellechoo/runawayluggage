@@ -21,11 +21,11 @@
       document.querySelector('.letter-button-end').addEventListener('click', function () {
         const overlay = document.querySelector('.fade-overlay');
 
-        // Apply transition effect
+        
         overlay.style.transition = 'opacity 1s ease-in-out';
         overlay.style.opacity = 1;
 
-        // Wait for fade-out to complete before redirecting
+        
         setTimeout(function() {
           window.location.href = 'index.html'; 
         }, 1000); 
